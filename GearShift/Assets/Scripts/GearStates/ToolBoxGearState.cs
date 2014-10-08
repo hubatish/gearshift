@@ -9,7 +9,7 @@ namespace MathDash
     public class ToolBoxGearState : GearState
     {
         protected HeldGearState heldState;
-        
+		public GearboxSpawner gearSpawner;
         protected override void Start()
         {
             heldState = gameObject.GetComponent<HeldGearState>();
@@ -28,10 +28,12 @@ namespace MathDash
         {
             //Collisions with this object should never actually happen but...
             rigidbody.isKinematic = true;
+			gameObject.layer = LayerMask.NameToLayer ("Gearbox Gears");
         }
         public override void Deactivate()
         {
             rigidbody.isKinematic = false;
+			gameObject.layer = LayerMask.NameToLayer ("Default");
         }
     }
 }
