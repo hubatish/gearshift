@@ -14,15 +14,11 @@ public class GearboxSpawner : MonoBehaviour {
 			createdGears.Add(spawnGear(i));
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
-	void OnMouseDrag(){
+	void Update(){
+		Debug.Log("created gear");
 		for (int i = 3; i >= 0; i--) {
 			if(createdGears[i].layer == LayerMask.NameToLayer ("Default")){
-				//createdGears.RemoveAt(i);
 				createdGears[i] = spawnGear(i);
 			}
 		}
