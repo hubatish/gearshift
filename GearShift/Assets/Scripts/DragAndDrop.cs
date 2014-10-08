@@ -25,10 +25,15 @@ public class DragAndDrop : MonoBehaviour
 	/**********************/
 	/**    Model Data    **/
 	/**********************/
-	public GameObject baseGear;
 	private bool isMoveable;
+	private int collisions;
+	
 	private Vector3 pointOnScreen;
 	private Vector3 offset;
+	
+	float xLastPosition;
+	float yLastPosition;
+	float zLastPosition;
 	
 	/**********************/
 	/**   Constructors   **/
@@ -41,6 +46,12 @@ public class DragAndDrop : MonoBehaviour
 	void Start()
 	{
 		isMoveable = true;
+		
+		collisions = 0;
+		
+		xLastPosition = transform.position.x;
+		yLastPosition = transform.position.y;
+		zLastPosition = transform.position.z;
 	}
 	
 	/**********************/
@@ -94,35 +105,66 @@ public class DragAndDrop : MonoBehaviour
 		offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
 	}
 	
+	void OnMouseUp()
+	{
+		xLastPosition = transform.position.x;
+		yLastPosition = transform.position.y;
+		zLastPosition = transform.position.z;
+	}
+	
 	// Called when the selected gear is translated on the screen.
 	void OnMouseDrag() 
 	{  
 		if (this.getMoveable())
 		{
-			// Apply Mouse Coordinates of the Gear.
-			this.setXPosition(Input.mousePosition.x);
-			this.setYPosition(Input.mousePosition.y);
-			this.setZPosition(pointOnScreen.z);
-			
-			// Translate Mouse to Screen Coordinates.
-			transform.position = Camera.main.ScreenToWorldPoint(transform.position) + offset;
-			
-			// Apply Level Boundaries
-			if (this.getXPosition() < -4.0f)
-			{ this.setXPosition(-4.0f); }
-			
-			if (this.getXPosition() > 4.0f)
-			{ this.setXPosition(4.0f); }
-			
-			if (this.getZPosition() < -4.0f)
-			{ this.setZPosition(-4.0f); }
-			
-			if (this.getZPosition() > 4.0f)
-			{ this.setZPosition(4.0f); }
-			
-			// Apply Snapping
+			if (this.collisions == 0)
+			{
+				// Apply Mouse Coordinates of the Gear.
+				this.setXPosition(Input.mousePosition.x);
+				this.setYPosition(Input.mousePosition.y);
+				this.setZPosition(pointOnScreen.z);
+				
+				// Translate Mouse to Screen Coordinates.
+				this.transform.position = Camera.main.ScreenToWorldPoint(this.transform.position) + this.offset;
+				
+				// Apply Level Boundaries
+				if (this.getXPosition() < -4.0f)
+				{ this.setXPosition(-4.0f); }
+				
+				if (this.getXPosition() > 4.0f)
+				{ this.setXPosition(4.0f); }
+				
+				if (this.getZPosition() < -4.0f)
+				{ this.setZPosition(-4.0f); }
+				
+				if (this.getZPosition() > 4.0f)
+				{ this.setZPosition(4.0f); }
+				
+				// Lock Coordinates of Gear.
+				this.xLastPosition = this.transform.position.x;
+				this.yLastPosition = this.transform.position.y;
+				this.zLastPosition = this.transform.position.z;
+			}
+			else
+			{
+				// Revert to Old Position.
+				this.setXPosition(this.xLastPosition);
+				this.setYPosition(this.yLastPosition);
+				this.setZPosition(this.zLastPosition);
+				
+				// Translate Mouse to Screen Coordinates.
+				this.transform.position = Camera.main.ScreenToWorldPoint(this.transform.position) + this.offset;
+			}
 		}
 	}
+	
+	// Called when two gears collide.
+	void OnCollisionEnter()
+	{ collisions = collisions + 1; }
+	
+	// Called when two gears separate.
+	void OnCollisionExit()
+	{ collisions = collisions - 1; }
 	
 	/**********************/
 	/** Debuggers / Logs **/
