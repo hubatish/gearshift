@@ -4,11 +4,26 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace MathDash
+namespace GearShift
 {
     public class InPlaceGearState : GearState
     {
         protected HeldGearState holder;
+
+        protected float bigger = 1.25f;
+
+        protected CapsuleCollider capsule
+        {
+            get
+            {
+                if (_capsule == null)
+                {
+                    _capsule = gameObject.GetComponent<CapsuleCollider>();
+                }
+                return _capsule;
+            }
+        }
+        protected CapsuleCollider _capsule;
 
         protected override void Start()
         {
@@ -20,19 +35,20 @@ namespace MathDash
         {
         }
 
-        public override void Click() 
+        public override void Click()
         {
             master.ChangeState(holder);
         }
         public override void Release() { }
-        public override void Activate() 
+        public override void Activate()
         {
             rigidbody.isKinematic = true;
+            capsule.radius *= bigger;
         }
-        public override void Deactivate() 
+        public override void Deactivate()
         {
             rigidbody.isKinematic = false;
+            capsule.radius /= bigger;
         }
-
     }
 }

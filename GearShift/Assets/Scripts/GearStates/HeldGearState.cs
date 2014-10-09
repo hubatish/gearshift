@@ -4,11 +4,24 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace MathDash
+namespace GearShift
 {
     public class HeldGearState : GearState
     {
         protected InPlaceGearState inPlace;
+        protected CapsuleCollider capsule
+        {
+            get
+            {
+                if(_capsule==null)
+                {
+                    _capsule = gameObject.GetComponent<CapsuleCollider>();
+                }
+                return _capsule;
+            }
+        }
+        protected CapsuleCollider _capsule;
+        protected float bigger = 0.75f;
 
         public override void Move()
         {
@@ -26,13 +39,15 @@ namespace MathDash
         {
             pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
+            capsule.radius *= bigger;
         }
         public override void Deactivate()
         {
             lastPosition = transform.position;
+            capsule.radius /= bigger;
+            // Change to Deselected Graphics
+            this.renderer.material.color = new Color(0.43529411764705882352941176470588f, 0.42352941176470588235294117647059f, 0.55686274509803921568627450980392f, 1.0f);
         }
-
-        
 
         /**********************/
         /** Internal Classes **/
@@ -41,7 +56,6 @@ namespace MathDash
         /**********************/
         /**    Model Data    **/
         /**********************/
-        private bool isMoveable;
         private int collisions;
 
         private Vector3 pointOnScreen;
@@ -52,6 +66,17 @@ namespace MathDash
         float boundaryDistance;
 
         /**********************/
+        /** Operator Methods **/
+        /**********************/
+        private bool isValidLocation()
+        {
+            if (this.collisions > 0)
+            { return false; }
+            else
+            { return true; }
+        }
+
+        /**********************/
         /**   Constructors   **/
         /**********************/
 
@@ -59,17 +84,14 @@ namespace MathDash
         /**   Initializers   **/
         /**********************/
         // Use this for initialization
-        void Start()
+        protected override void Start()
         {
-            isMoveable = true;
-
             collisions = 0;
 
             lastPosition = transform.position;
 
             inPlace = gameObject.GetComponent<InPlaceGearState>();
             base.Start();
-
         }
 
         /**********************/
@@ -81,9 +103,6 @@ namespace MathDash
         /**********************/
         /** Accessor Methods **/
         /**********************/
-        bool getMoveable()
-        { return this.isMoveable; }
-
         float getXPosition()
         { return this.transform.position.x; }
 
@@ -96,10 +115,6 @@ namespace MathDash
         /**********************/
         /** Mutation Methods **/
         /**********************/
-        // Needed for later "finalizing" gear placement
-        void setMoveable(bool flag)
-        { this.isMoveable = flag; }
-
         void setXPosition(float value)
         { this.transform.position = new Vector3(value, this.transform.position.y, this.transform.position.z); }
 
@@ -141,31 +156,24 @@ namespace MathDash
             if (this.getZPosition() > boundaryDistance)
             { this.setZPosition(boundaryDistance); }*/
 
-            if (this.collisions == 0)
+            // Check if location is valid.
+            if (this.isValidLocation())
             {
                 // Lock Coordinates of Gear.
                 lastPosition = transform.position;
+                this.renderer.material.color = Color.green; 
             }
             else
-            {
-                Debug.Log("there are collisions");
-                // Revert to Old Position.
-/*                this.setXPosition(this.xLastPosition);
-                this.setYPosition(this.yLastPosition);
-                this.setZPosition(this.zLastPosition);
-
-                // Translate Mouse to Screen Coordinates.
-                this.transform.position = Camera.main.ScreenToWorldPoint(this.transform.position) + this.offset;*/
-                
+            { 
+                this.renderer.material.color = Color.red; 
             }
-        
         }
 
         // Called when two gears collide.
-        void OnCollisionEnter()
+        void OnTriggerEnter()
         { collisions = collisions + 1; }
 
-        void OnCollisionStay()
+        void OnTriggerStay()
         {
             //This gets called even when component is disabled, so return
             if(!enabled)
@@ -176,7 +184,7 @@ namespace MathDash
         }
 
         // Called when two gears separate.
-        void OnCollisionExit()
+        void OnTriggerExit()
         { collisions = collisions - 1; }
     }
 }
