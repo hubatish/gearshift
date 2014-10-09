@@ -150,6 +150,7 @@ GameObject:
   - 95: {fileID: 788626321}
   - 114: {fileID: 788626320}
   - 136: {fileID: 788626325}
+  - 114: {fileID: 788626327}
   - 54: {fileID: 788626326}
   m_Layer: 0
   m_Name: Gear
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 788626319}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30a5333fb5158c140a2d253fd0a6bf93, type: 3}
   m_Name: 
@@ -235,10 +236,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .102353647
-  m_Height: .023946302
+  m_Radius: .0799999982
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 3.7252903e-09, y: 2.25193799e-06, z: 7.4505806e-09}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &788626326
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -250,10 +251,24 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &788626327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 788626319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752eb26f4c95f5d4e83fcdfd303464a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gearState: 0
+  isMoveable: 0
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &792645841
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +282,7 @@ GameObject:
   - 95: {fileID: 792645844}
   - 114: {fileID: 792645843}
   - 136: {fileID: 792645842}
+  - 114: {fileID: 792645849}
   - 54: {fileID: 792645848}
   m_Layer: 0
   m_Name: Gear
@@ -284,17 +300,17 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .102353647
-  m_Height: .023946302
+  m_Radius: .0799999982
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 3.7252903e-09, y: 2.25193799e-06, z: 7.4505806e-09}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &792645843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 792645841}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30a5333fb5158c140a2d253fd0a6bf93, type: 3}
   m_Name: 
@@ -366,11 +382,25 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &792645849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 792645841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752eb26f4c95f5d4e83fcdfd303464a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gearState: 0
+  isMoveable: 0
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1009463398
 Prefab:
   m_ObjectHideFlags: 0
