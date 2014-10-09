@@ -154,7 +154,7 @@ public class GearController : MonoBehaviour
 		if (this.isValidLocation())
 		{
 			// Apply Mouse Position.
-/*			this.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.pointWorldScreen.z)) + this.mouseOffset;
+			this.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.pointWorldScreen.z)) + this.mouseOffset;
 			
 			// Apply Level Boundaries.
 			if (this.transform.position.x < -3.6f)
@@ -169,7 +169,7 @@ public class GearController : MonoBehaviour
 			if (this.transform.position.z > 3.6f)
 			{ this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 3.6f); }
 			
-			// Lock new Last Position.*/
+			// Lock new Last Position.
 			this.setLastPosition(this.transform.position);
 			
 			// Convert Gear State to mark it as being on the Board.
