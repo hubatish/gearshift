@@ -6,14 +6,21 @@ using UnityEngine;
 
 namespace GearShift
 {
+    /// <summary>
+    /// State manager for gears
+    /// </summary>
     public class Gear : MonoBehaviour
     {
         public GearState state;
 
         protected void Start()
         {
-            //Start in wanderer state by default
-            state = gameObject.GetComponent<ToolBoxGearState>();
+            if(state!=null)
+            {
+                //By default select toolbox, but which GearState to use can also be dragged in
+                state = gameObject.GetComponent<ToolBoxGearState>();
+            }
+            //Change to that state to ensure Activate messages are properly called
             ChangeState(state);
         }
         
@@ -29,8 +36,6 @@ namespace GearShift
 
         protected void Update()
         {
-            state.Move();
-
             //really, only the held state needs a release button
             if (Input.GetMouseButtonUp(0))
             {

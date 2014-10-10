@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace GearShift
 {
+    /// <summary>
+    /// Causes the gear to rotate
+    /// Also detects collisions with other gears and decides whether to rotate based on whether they're rotating or not
+    /// Probably needs some abstraction to account for different gear teeth, though that could be as simple as an enum
+    /// </summary>
     public class Rotater : MonoBehaviour
     {
         protected float rotationSpeed = 10f;
@@ -53,7 +58,7 @@ namespace GearShift
         {
             if(!isRotating)
             {
-                //we shouldn't be rotating, so don't rotate
+                //we shouldn't be rotating, so don't rotate/do anything
                 return;
             }
             float toRotate = rotationSpeed;
@@ -64,11 +69,6 @@ namespace GearShift
             }
             //Rotate around the y axis
             transform.Rotate(Vector3.up * Time.deltaTime * toRotate);
-        }
-
-        protected void OnTriggerStay(Collider col)
-        {
-            //Debug.Log("collision between " + gameObject.name + " and " + col.gameObject.name);
         }
 
         protected void OnTriggerEnter(Collider col)
@@ -82,12 +82,10 @@ namespace GearShift
                 isRotating = true;
                 clockwise = !other.clockwise;
             }
-            //Debug.Log("collision enter " + gameObject.name + " and " + col.gameObject.name + " attached to " + attachedGears.Count);
         }
 
         protected void OnTriggerExit(Collider col)
         {
-            //Debug.Log("collision exit " + gameObject.name + " and " + col.gameObject.name + " attached to " + attachedGears.Count);
             //Unattach the gear
             attachedGears.Remove(col.GetComponent<Rotater>());
             if(attachedGears.Count==0)

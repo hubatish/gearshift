@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Spawns gears and puts them in the toolbox at spawnpoints array locations
+/// </summary>
 public class GearboxSpawner : MonoBehaviour {
 	public GameObject[] gearList;
 	//ArrayList createdGears = new ArrayList();

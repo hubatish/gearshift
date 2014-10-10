@@ -13,6 +13,8 @@
 // THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+//Deprecated
+
 using UnityEngine;
 using System.Collections;
 
