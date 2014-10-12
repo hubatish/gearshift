@@ -27,8 +27,15 @@ public class GearboxSpawner : MonoBehaviour {
 	}
 
 	GameObject spawnGear(int i){
-		GameObject newGear = Instantiate (gearList [0], spawnpoints [i], transform.rotation) as GameObject;
+		int randomGearNum = getRandomGearIndex ();
+		GameObject newGear = Instantiate (gearList [randomGearNum], spawnpoints [i], transform.rotation) as GameObject;
+		newGear.layer = LayerMask.NameToLayer ("Gearbox Gears");
 		return newGear;
+	}
+
+	int getRandomGearIndex(){
+		var index = Random.Range(0, gearList.Length);
+		return index;
 	}
 		
 }
