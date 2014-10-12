@@ -13,7 +13,14 @@ namespace GearShift
     /// </summary>
     public class Rotater : MonoBehaviour
     {
-        protected float rotationSpeed = 10f;
+        //How fast do the gears rotate when turning?
+        public float rotationSpeed = 10f;
+
+        //Different types of teeth
+        public enum GearTeeth { Square, Holes, Spikes};
+
+        //What teeth do I have and what teeth can I connect to?
+        public List<GearTeeth> teeth;
 
         //Are we attached to other rotating gears?
         public bool isRotating
@@ -75,23 +82,74 @@ namespace GearShift
         {
             //Attach the next gear
             Rotater other = col.GetComponent<Rotater>();
-            attachedGears.Add(other);
-            //Start rotating if the other one is rotating
-            if(other.isRotating)
+            if(other.teeth.Intersect(teeth).Count()>0)
             {
-                isRotating = true;
-                clockwise = !other.clockwise;
+                bool newGear = (attachedGears.Count == 0);
+                //we have at least some of the same teeth, so become connected
+                attachedGears.Add(other);
+                if(newGear)
+                {
+                    //Only check connection when new gears are added
+                    CheckConnectionToRoot();
+                }
             }
         }
 
         protected void OnTriggerExit(Collider col)
         {
             //Unattach the gear
-            attachedGears.Remove(col.GetComponent<Rotater>());
-            if(attachedGears.Count==0)
+            Rotater other = col.GetComponent<Rotater>();
+            if(attachedGears.Contains(other))
             {
-                isRotating = false;
+                //We were connected, break that connection
+                attachedGears.Remove(other);
+
+                CheckConnectionToRoot();
             }
+        }
+
+        /// <summary>
+        /// Recursively alk the tree of connected gears until one is found that is the root gear or all gears in the chain are walked
+        /// With side effects of starting to rotate if connected, or stopping if not
+        /// </summary>
+        /// <param name="gears">Rotater's in this list have already been checked - don't check again</param>
+        /// <returns>true if the chain is connected to the root gear</returns>
+        public bool CheckConnectionToRoot(List<Rotater> checkedGears = null)
+        {
+            if (checkedGears == null)
+            {
+                //Initialize default arguments (ie, checking starting with me)
+                checkedGears = new List<Rotater>();
+            }
+            if (rootGear)
+            {
+                //I am the root, whatever called this is connected
+                return true;
+            }
+            //Get all attached gears that haven't been checked yet
+            IEnumerable<Rotater> unCheckedGears = attachedGears.Where(gear => !checkedGears.Contains(gear));
+
+            //Add myself to checked gears and recurse
+            checkedGears.Add(this);
+            foreach (Rotater gear in unCheckedGears)
+            {
+                if (gear.CheckConnectionToRoot(checkedGears))
+                {
+                    //We are connected!
+                    isRotating = true;
+                    clockwise = !gear.clockwise;
+                    return true;
+                }
+                else
+                {
+                    //Probably doing unnecessary work when 3 gears are connected to each other but...
+                    //Add the gear we just checked to the list and try the other gear
+                    checkedGears.Add(gear);
+                }
+            }
+            //We aren't connected to the root gear
+            isRotating = false;
+            return false;
         }
 
     }

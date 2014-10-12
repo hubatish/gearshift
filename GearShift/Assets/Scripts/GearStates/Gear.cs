@@ -15,7 +15,7 @@ namespace GearShift
 
         protected void Start()
         {
-            if(state!=null)
+            if(state==null)
             {
                 //By default select toolbox, but which GearState to use can also be dragged in
                 state = gameObject.GetComponent<ToolBoxGearState>();

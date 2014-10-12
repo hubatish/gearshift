@@ -105,7 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6088b5832558494f82db79662b83f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inChain: 0
+  rotationSpeed: 10
+  teeth: 00000000
+  rootGear: 0
   clockwise: 1
 --- !u!114 &11400002
 MonoBehaviour:
