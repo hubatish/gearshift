@@ -9,7 +9,6 @@ namespace GearShift
     public class ToolBoxGearState : GearState
     {
         protected HeldGearState heldState;
-		public GearboxSpawner gearSpawner;
         protected override void Start()
         {
             heldState = gameObject.GetComponent<HeldGearState>();
