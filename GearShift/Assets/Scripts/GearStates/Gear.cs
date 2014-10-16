@@ -24,7 +24,7 @@ namespace GearShift
             ChangeState(state);
         }
         
-        //Change current state and enable/disable appropriate components.
+        //Change current state and enable/disable appriopriate components?
         public void ChangeState(GearState newState)
         {
             state.Deactivate();
