@@ -6,9 +6,16 @@ using UnityEngine;
 
 namespace GearShift
 {
+    /// <summary>
+    /// State that is active while the gear is being dragged around
+    /// Handles placement of gear, and checking to see if every location is valid
+    /// </summary>
     public class HeldGearState : GearState
     {
+        //The state that we're going to change to
         protected InPlaceGearState inPlace;
+        //The CapsuleCollider attached to this gameobject
+        //Using a getter to only find the collider if/when we need it
         protected CapsuleCollider capsule
         {
             get
@@ -20,16 +27,10 @@ namespace GearShift
                 return _capsule;
             }
         }
-        protected CapsuleCollider _capsule;
-        protected float bigger = 0.75f;
+        private CapsuleCollider _capsule;
+        //When activated, make the collider smaller to squeeze in next to other gears
+        public float bigger = 0.75f;
 
-        public override void Move()
-        {
-        }
-        public override void Click() 
-        {
-           
-        }
         public override void Release() 
         {
             //check for collisions
@@ -37,16 +38,16 @@ namespace GearShift
         }
         public override void Activate() 
         {
-            pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
-            offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
+            //Make my collider smaller
             capsule.radius *= bigger;
+            prevColor = renderer.material.color;
         }
         public override void Deactivate()
         {
-            lastPosition = transform.position;
+            //resize myself to previous size
             capsule.radius /= bigger;
             // Change to Deselected Graphics
-            this.renderer.material.color = new Color(0.43529411764705882352941176470588f, 0.42352941176470588235294117647059f, 0.55686274509803921568627450980392f, 1.0f);
+            this.renderer.material.color = prevColor;
         }
 
         /**********************/
@@ -63,7 +64,9 @@ namespace GearShift
 
         protected Vector3 lastPosition;
 
-        float boundaryDistance;
+        public float boundaryDistance = 5f;
+
+        protected Color prevColor;
 
         /**********************/
         /** Operator Methods **/
@@ -75,42 +78,6 @@ namespace GearShift
             else
             { return true; }
         }
-
-        /**********************/
-        /**   Constructors   **/
-        /**********************/
-
-        /**********************/
-        /**   Initializers   **/
-        /**********************/
-        // Use this for initialization
-        protected override void Start()
-        {
-            collisions = 0;
-
-            lastPosition = transform.position;
-
-            inPlace = gameObject.GetComponent<InPlaceGearState>();
-            base.Start();
-        }
-
-        /**********************/
-        /**     Updating     **/
-        /**********************/
-        // Update is called once per frame
-        void Update() { }
-
-        /**********************/
-        /** Accessor Methods **/
-        /**********************/
-        float getXPosition()
-        { return this.transform.position.x; }
-
-        float getYPosition()
-        { return this.transform.position.y; }
-
-        float getZPosition()
-        { return this.transform.position.z; }
 
         /**********************/
         /** Mutation Methods **/
@@ -125,14 +92,37 @@ namespace GearShift
         { this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value); }
 
         /**********************/
-        /** Operator Methods **/
+        /**   Constructors   **/
         /**********************/
+
+        /**********************/
+        /**   Initializers   **/
+        /**********************/
+        protected void Start()
+        {
+            //Using this rather than Activate for clarity
+            collisions = 0;
+            lastPosition = transform.position;
+            pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
+            offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
+        }
+
+        protected override void Awake()
+        {
+            //Find needed scripts
+            inPlace = gameObject.GetComponent<InPlaceGearState>();
+            base.Awake();
+        }
+
+        /**********************/
+        /**     Updating     **/
+        /**********************/
+        // Update is called once per frame
+        void Update() { }
 
         /**********************/
         /** Events / Drivers **/
         /**********************/
-        // Called when the gear is selected.
-
         // Called when the selected gear is translated on the screen.
         void OnMouseDrag()
         {
@@ -144,17 +134,17 @@ namespace GearShift
             this.transform.position = worldPoint + this.offset;
 
             // Apply Level Boundaries
-/*            if (this.getXPosition() < -boundaryDistance)
+            if (transform.position.x < -boundaryDistance)
             { this.setXPosition(-boundaryDistance); }
 
-            if (this.getXPosition() > boundaryDistance)
+            if (transform.position.x > boundaryDistance)
             { this.setXPosition(boundaryDistance); }
 
-            if (this.getZPosition() < -boundaryDistance)
+            if (transform.position.z < -boundaryDistance)
             { this.setZPosition(-boundaryDistance); }
 
-            if (this.getZPosition() > boundaryDistance)
-            { this.setZPosition(boundaryDistance); }*/
+            if (transform.position.z > boundaryDistance)
+            { this.setZPosition(boundaryDistance); }
 
             // Check if location is valid.
             if (this.isValidLocation())
@@ -169,21 +159,30 @@ namespace GearShift
             }
         }
 
+        ///***********************************
+        /// Collision Events
+        ///     Get called even when component is disabled
+        ///     For trigger enter/exit this desired
+        ///***********************************
+
         // Called when two gears collide.
+        // Record the number of gears we're hitting
         void OnTriggerEnter()
         { collisions = collisions + 1; }
 
         void OnTriggerStay()
         {
-            //This gets called even when component is disabled, so return
+            // Shouldn't warp back when this state isn't enabled
             if(!enabled)
             {
                 return;
             }
+            //Otherwise, warp back previous position
             transform.position = lastPosition;
         }
 
         // Called when two gears separate.
+        // Decrease number of gears hitting
         void OnTriggerExit()
         { collisions = collisions - 1; }
     }
