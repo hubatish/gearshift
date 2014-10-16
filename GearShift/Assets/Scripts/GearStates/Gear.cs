@@ -8,8 +8,6 @@ namespace GearShift
 {
     /// <summary>
     /// State manager for gears
-    /// Handles state changes
-    ///     and sends out Click, Release, Activate/Deactivate messages to all the individual gears
     /// </summary>
     public class Gear : MonoBehaviour
     {
@@ -19,24 +17,14 @@ namespace GearShift
         {
             if(state==null)
             {
-                //By default select toolbox, but which GearState to start with can be dragged in
+                //By default select toolbox, but which GearState to use can also be dragged in
                 state = gameObject.GetComponent<ToolBoxGearState>();
             }
-
-            //Make sure Activate is called for starting script
-            if (!state.enabled)
-            {
-                state.enabled = true;
-            }
-            state.Activate();
-
+            //Change to that state to ensure Activate messages are properly called
+            ChangeState(state);
         }
         
-<<<<<<< HEAD
         //Change current state and enable/disable appropriate components.
-=======
-        //Change current state by disable appriopriate components
->>>>>>> origin/master
         public void ChangeState(GearState newState)
         {
             state.Deactivate();
@@ -48,7 +36,7 @@ namespace GearShift
 
         protected void Update()
         {
-            //Send out release message
+            //really, only the held state needs a release button
             if (Input.GetMouseButtonUp(0))
             {
                 state.Release();
@@ -57,7 +45,6 @@ namespace GearShift
 
         protected void OnMouseOver()
         {
-            //Send out click to the current state
             if(Input.GetMouseButtonDown(0))
             {
                 state.Click();

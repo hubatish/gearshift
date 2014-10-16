@@ -16,6 +16,12 @@ namespace GearShift
         //How fast do the gears rotate when turning?
         public float rotationSpeed = 10f;
 
+        //Different types of teeth
+        public enum GearTeeth { Square, Holes, Spikes};
+
+        //What teeth do I have and what teeth can I connect to?
+        public List<GearTeeth> teeth;
+
         //Are we attached to other rotating gears?
         public bool isRotating
         {
@@ -57,19 +63,13 @@ namespace GearShift
 
         protected void Update()
         {
-            if(isRotating)
+            if(!isRotating)
             {
-                Rotate();
+                //we shouldn't be rotating, so don't rotate/do anything
+                return;
             }
-        }
-
-        /// <summary>
-        /// Spin a clockwise or counterclockwise fashion
-        /// </summary>
-        protected void Rotate()
-        {
             float toRotate = rotationSpeed;
-            if (!clockwise)
+            if(!clockwise)
             {
                 //clockwise is opposite direction of counter-clockwise
                 toRotate = -toRotate;
@@ -82,13 +82,16 @@ namespace GearShift
         {
             //Attach the next gear
             Rotater other = col.GetComponent<Rotater>();
-            bool newGear = (attachedGears.Count == 0);
-            //we have at least some of the same teeth, so become connected
-            attachedGears.Add(other);
-            if(newGear)
+            if(other.teeth.Intersect(teeth).Count()>0)
             {
-                //Only check connection when new gears are added
-                CheckConnectionToRoot();
+                bool newGear = (attachedGears.Count == 0);
+                //we have at least some of the same teeth, so become connected
+                attachedGears.Add(other);
+                if(newGear)
+                {
+                    //Only check connection when new gears are added
+                    CheckConnectionToRoot();
+                }
             }
         }
 
@@ -106,7 +109,7 @@ namespace GearShift
         }
 
         /// <summary>
-        /// Recursively walk the tree of connected gears until one is found that is the root gear or all gears in the chain are walked
+        /// Recursively alk the tree of connected gears until one is found that is the root gear or all gears in the chain are walked
         /// With side effects of starting to rotate if connected, or stopping if not
         /// </summary>
         /// <param name="gears">Rotater's in this list have already been checked - don't check again</param>
