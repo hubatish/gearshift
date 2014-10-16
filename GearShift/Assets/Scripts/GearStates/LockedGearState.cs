@@ -19,14 +19,14 @@ namespace GearShift
 		
         protected CapsuleCollider _capsule;
 
-        protected override void Start()
+        protected void Start()
         {
             base.Start();
         }
 
-        public override void Move() {}
+        public void Move() {}
 
-        public override void Click()
+        public void Click()
         {
             Destroy(this);
         }
