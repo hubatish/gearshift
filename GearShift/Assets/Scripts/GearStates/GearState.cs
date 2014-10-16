@@ -22,7 +22,8 @@ namespace GearShift
         public abstract void Activate();
         //What happens when state is deactivated/left.  A mirror of Activate
         public abstract void Deactivate();
-
+		//Called the first time the component starts
+		protected virtual void Start() {}
         //Called the first time the component is enabled
         protected virtual void Awake()
         {
