@@ -22,8 +22,14 @@ namespace GearShift
                 //By default select toolbox, but which GearState to start with can be dragged in
                 state = gameObject.GetComponent<ToolBoxGearState>();
             }
-            //Change to that state to ensure Activate messages are properly called
-            ChangeState(state);
+
+            //Make sure Activate is called for starting script
+            if (!state.enabled)
+            {
+                state.enabled = true;
+            }
+            state.Activate();
+
         }
         
         //Change current state by disable appriopriate components
