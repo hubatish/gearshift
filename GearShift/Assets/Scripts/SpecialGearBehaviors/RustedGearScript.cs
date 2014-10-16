@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GearDeletion : MonoBehaviour {
+public class RustedGearScript : MonoBehaviour {
 	public int movesTillDeletion = 5;
 	public int numItemAdded = 0;
 	private int prevTotalTagged = 0;

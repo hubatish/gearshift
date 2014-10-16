@@ -12,6 +12,7 @@ namespace GearShift
                 if (_capsule == null)
                 {
                     _capsule = gameObject.GetComponent<CapsuleCollider>();
+					this.tag = "Placed Gear";
                 }
                 return _capsule;
             }

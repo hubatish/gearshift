@@ -21,7 +21,6 @@ public class GearboxSpawner : MonoBehaviour {
 	void Update(){
 		for (int i = 3; i >= 0; i--) {
 			if(createdGears[i].layer == LayerMask.NameToLayer ("Default")){
-				createdGears[i].tag = "Placed Gear";
 				createdGears[i] = spawnGear(i);
 			}
 		}
