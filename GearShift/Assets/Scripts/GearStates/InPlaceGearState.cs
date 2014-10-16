@@ -6,12 +6,20 @@ using UnityEngine;
 
 namespace GearShift
 {
+    /// <summary>
+    /// State of gear when placed on the field
+    /// Makes its colliders bigger when placed
+    /// </summary>
     public class InPlaceGearState : GearState
     {
+        //The state that we're going to change to
         protected HeldGearState holder;
+        protected Rotater rotater;
 
-        protected float bigger = 1.25f;
-
+        //When activated, make the collider smaller to squeeze in next to other gears
+        public float bigger = 1.25f;
+        //The CapsuleCollider attached to this gameobject
+        //Using a getter to only find the collider if/when we need it
         protected CapsuleCollider capsule
         {
             get
@@ -23,32 +31,35 @@ namespace GearShift
                 return _capsule;
             }
         }
-        protected CapsuleCollider _capsule;
+        private CapsuleCollider _capsule;
 
-        protected override void Start()
+        protected override void Awake()
         {
+            //Find components we need
             holder = gameObject.GetComponent<HeldGearState>();
-            base.Start();
-        }
-
-        public override void Move()
-        {
+            rotater = gameObject.GetComponent<Rotater>();
+            base.Awake();
         }
 
         public override void Click()
         {
             master.ChangeState(holder);
         }
-        public override void Release() { }
         public override void Activate()
         {
+            //resize my collider and let the gear pass through other objects
             rigidbody.isKinematic = true;
             capsule.radius *= bigger;
+            //Start the rotation scripts
+            rotater.enabled = true;
         }
         public override void Deactivate()
         {
+            //set collider back to original size and make it solid again
             rigidbody.isKinematic = false;
             capsule.radius /= bigger;
+            //Deactivate the rotation scripts
+            rotater.enabled = false;
         }
     }
 }

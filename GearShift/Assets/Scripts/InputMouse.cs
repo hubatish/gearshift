@@ -6,15 +6,25 @@ using UnityEngine;
 
 namespace GearShift
 {
-    public static class InputMouse
+    /// <summary>
+    /// Helps get the position of the mouse in the world
+    /// Will need to communicate with layers to make sure getting correct z value
+    /// </summary>
+    public class InputMouse : Singleton<MonoBehaviour>
     {
-        public static Vector3 worldPosition
+        protected Vector3 pointOnScreen;
+
+        protected void Awake()
+        {
+            pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
+            base.Awake();
+        }
+
+        public Vector3 worldPosition
         {
             get
             {
-                Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                worldPoint.z = 0; //Camera is in different plane than rest of game - it will return a position with same z value as camera
-                return worldPoint;
+                return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
             }
         }
     }
