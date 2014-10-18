@@ -104,6 +104,9 @@ MonoBehaviour:
   gearList:
   - {fileID: 100000, guid: a6839b9cc24097c49a099f99c2ee4533, type: 2}
   - {fileID: 100000, guid: 63026a936a426b946895cc140d0a8d3d, type: 2}
+  - {fileID: 100000, guid: 6406e4a836693094ab61fc24d3df4641, type: 2}
+  - {fileID: 100000, guid: 9a1cd5ca16d255e48be6bd88e675508e, type: 2}
+  spawnProbability: 06000000020000000200000001000000
   spawnpoints:
   - {x: -2.5, y: 2, z: -3.8499999}
   - {x: -.860000014, y: 2, z: -3.8499999}
@@ -120,7 +123,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
 --- !u!1 &166955423
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +152,6 @@ Transform:
   - {fileID: 1331219864}
   - {fileID: 672458940}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!1 &366383636
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ GameObject:
   - 4: {fileID: 366383637}
   - 131: {fileID: 366383638}
   m_Layer: 8
-  m_Name: BorderGraphic
+  m_Name: BackgroundGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,7 +179,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 166955424}
-  m_RootOrder: 0
 --- !u!131 &366383638
 GUITexture:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ GUITexture:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 366383636}
   m_Enabled: 1
-  m_Texture: {fileID: 2800000, guid: 70d87f30390f9ef4489718642bc432f2, type: 3}
+  m_Texture: {fileID: 2800000, guid: 8b44e942f055d55479118e875d4bc7b1, type: 3}
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
@@ -225,7 +225,6 @@ Transform:
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children: []
   m_Father: {fileID: 166955424}
-  m_RootOrder: 2
 --- !u!131 &672458941
 GUITexture:
   m_ObjectHideFlags: 0
@@ -304,11 +303,8 @@ Camera:
     m_Bits: 4294966015
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
 --- !u!4 &785255375
 Transform:
   m_ObjectHideFlags: 0
@@ -320,7 +316,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
 --- !u!1 &987818065
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +344,6 @@ Transform:
   - {fileID: 1570056681}
   - {fileID: 1230458862}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!1 &1230458858
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,8 +380,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!64 &1230458860
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -419,7 +414,6 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 987818066}
-  m_RootOrder: 1
 --- !u!1 &1331219861
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +460,6 @@ Transform:
   m_LocalScale: {x: .620000005, y: .400000006, z: .620000005}
   m_Children: []
   m_Father: {fileID: 166955424}
-  m_RootOrder: 1
 --- !u!1 &1411933093
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,11 +519,8 @@ Camera:
     m_Bits: 1280
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
 --- !u!4 &1411933097
 Transform:
   m_ObjectHideFlags: 0
@@ -542,7 +532,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
 --- !u!1 &1570056679
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +594,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 987818066}
-  m_RootOrder: 0
 --- !u!1 &2004932761
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +689,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!95 &2004932767
 Animator:
-  serializedVersion: 3
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 9500000, guid: 8372073bca3ffea4eaecca059620f803,
     type: 2}
@@ -711,10 +699,9 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 268cc6482f53a3e41ac061fb707006ee, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
-  m_UpdateMode: 0
   m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!23 &2004932768
 Renderer:
   m_ObjectHideFlags: 0
@@ -734,8 +721,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &2004932769
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -755,4 +743,3 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0

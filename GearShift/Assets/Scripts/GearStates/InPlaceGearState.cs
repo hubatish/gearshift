@@ -51,7 +51,10 @@ namespace GearShift
             rigidbody.isKinematic = true;
             capsule.radius *= bigger;
             //Start the rotation scripts
-            rotater.enabled = true;
+            rotater.enabled = true;		
+
+			// Eventually, the "Placed Gear" tag definition should be moved to LockedGearState
+			this.tag = "Placed Gear";
         }
         public override void Deactivate()
         {
