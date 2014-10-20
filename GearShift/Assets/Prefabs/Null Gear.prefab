@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e5918ab3fedfe4fbee6a9dd8c287e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionRadius: 2.5
-  blackHoleRadius: 2.5
+  destructionRadius: 2
+  blackHoleRadius: 1.79999995
   blackHole: {fileID: 0}
   destructionField: {fileID: 0}
   hasDestroyed: 0
