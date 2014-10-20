@@ -508,6 +508,7 @@ GameObject:
   - 114: {fileID: 1068785985}
   - 114: {fileID: 1068785984}
   - 114: {fileID: 1068785983}
+  - 114: {fileID: 1068785992}
   m_Layer: 0
   m_Name: StartGear
   m_TagString: Untagged
@@ -554,7 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd9a54bb0f536a48bacd86f72668b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: {fileID: 0}
+  state: {fileID: 1068785992}
 --- !u!136 &1068785986
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -642,6 +643,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1068785992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 4cc687299e5621f4786b5332274d9499,
+    type: 2}
+  m_PrefabInternal: {fileID: 1464057925}
+  m_GameObject: {fileID: 1068785982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701cfcd874da2ce4cbc7a6f4678fd43d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1186444579
 Prefab:
   m_ObjectHideFlags: 0

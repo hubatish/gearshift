@@ -15,12 +15,12 @@ namespace GearShift
     {
         public GearState state;
 
-        protected void Start()
+        protected void Awake()
         {
-            if(state==null)
+            if (state == null)
             {
-                //By default select toolbox, but which GearState to start with can be dragged in
-                state = gameObject.GetComponent<ToolBoxGearState>();
+                // Set to Null if none exists. Prefab Gear defaults to Toolbox on create.
+                state = gameObject.GetComponent<NullGearState>();
             }
 
             //Make sure Activate is called for starting script
@@ -31,6 +31,9 @@ namespace GearShift
             state.Activate();
 
         }
+		
+		protected void Start()
+        { }
         
         //Change current state and enable/disable appropriate components.
         public void ChangeState(GearState newState)
