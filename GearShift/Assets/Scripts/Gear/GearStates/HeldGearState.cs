@@ -33,6 +33,7 @@ namespace GearShift
 
         public override void Release()
         {
+			GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear();
             //check for collisions
             master.ChangeState(inPlace);
         }
@@ -107,8 +108,8 @@ namespace GearShift
             lastPosition = transform.position;
             pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
-            Debug.Log(transform.position);
-            Debug.Log("offset " + offset);
+            //Debug.Log(transform.position);
+            //Debug.Log("offset " + offset);
         }
 
         protected override void Awake()
