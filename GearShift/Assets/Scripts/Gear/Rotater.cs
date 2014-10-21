@@ -13,7 +13,7 @@ using GearShift;
 public class Rotater : MonoBehaviour
 {
     //How fast do the gears rotate when turning?
-    public float rotationSpeed = 10f;
+    public float rotationSpeed = 20f;
 
     //Are we attached to other rotating gears?
     public bool isRotating
@@ -25,7 +25,7 @@ public class Rotater : MonoBehaviour
         set
         {
             //The root gear can never not rotate
-            if(rootGear)
+            if (rootGear)
             {
                 _isRotating = true;
             }
