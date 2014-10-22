@@ -6,40 +6,25 @@ using UnityEngine;
 
 namespace GearShift
 {
-	public class Gate : MonoBehaviour
+	public class Gate : Obstacle
 		{
-			protected bool on;
-			public Gear linkedGear;
-			protected Rotater linkedRotation;
-			protected List<Rotater> checkedGears = null;
+			public Wall linkedWall;
 			
 			//change state to on and open/move
-			public void PowerOn()
+			public override void PowerOn()
 			{
 				on = true;
-				
-				Gate.Destroy(this);
-				
+                //Debug.Log("i tried to kill it0");
+				if(linkedWall!=null)
+                {
+                    GameObject.Destroy(linkedWall.gameObject);	
+                }
 			}
 			//change state to off and close/move
 			public void PowerOff()
 			{
 				on = false;
 			}
-			//if the linked gear changes State (rotating/not) the obstacle must move
-			public void ChangeState()
-			{
-				//check to see if the linked gear should rotate
-				if(linkedRotation.CheckConnectionToRoot(checkedGears))
-				{
-					PowerOn();
-				}
-				else
-				{
-					PowerOff();
-				}
-			}
-
 			
 		}
 }

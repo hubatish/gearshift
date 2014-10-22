@@ -42,6 +42,7 @@ namespace GearShift
             //Make my collider smaller
             capsule.radius *= bigger;
             prevColor = renderer.material.color;
+            gameObject.GetComponent<Rotater>().enabled = false;
         }
         public override void Deactivate()
         {
@@ -51,6 +52,7 @@ namespace GearShift
             this.renderer.material.color = prevColor;
             //warp to last locked position
             transform.position = lastPosition;
+            gameObject.GetComponent<Rotater>().enabled = true;
         }
 
         /**********************/
@@ -139,7 +141,7 @@ namespace GearShift
             this.transform.position = worldPoint + this.offset;
 
             // Apply Level Boundaries
-            if (transform.position.x < -boundaryDistance)
+/*            if (transform.position.x < -boundaryDistance)
             { this.setXPosition(-boundaryDistance); }
 
             if (transform.position.x > boundaryDistance)
@@ -149,7 +151,7 @@ namespace GearShift
             { this.setZPosition(-boundaryDistance); }
 
             if (transform.position.z > boundaryDistance)
-            { this.setZPosition(boundaryDistance); }
+            { this.setZPosition(boundaryDistance); }*/
 
             // Check if location is valid.
             if (isValidLocation())
