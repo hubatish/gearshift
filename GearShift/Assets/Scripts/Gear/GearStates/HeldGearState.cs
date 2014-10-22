@@ -33,7 +33,7 @@ namespace GearShift
 
         public override void Release()
         {
-			GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear();
+            GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear();
             //check for collisions
             master.ChangeState(inPlace);
         }
@@ -62,7 +62,6 @@ namespace GearShift
         /**********************/
         private int collisions;
 
-        private Vector3 pointOnScreen;
         private Vector3 offset;
 
         protected Vector3 lastPosition;
@@ -106,10 +105,9 @@ namespace GearShift
             //Using this rather than Activate for clarity
             collisions = 0;
             lastPosition = transform.position;
-            pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
-            offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z));
-            //Debug.Log(transform.position);
-            //Debug.Log("offset " + offset);
+            Vector3 fullOffset = transform.position - InputMouse.Instance.worldPosition;
+            offset = new Vector3(fullOffset.x, 0, fullOffset.z);
+            Debug.Log("starting offset " + offset + " and position " + transform.position + " wolrd pos " + InputMouse.Instance.worldPosition);
         }
 
         protected override void Awake()
@@ -132,10 +130,7 @@ namespace GearShift
         void OnMouseDrag()
         {
             // Apply Mouse Coordinates of the Gear.
-            Vector3 screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, pointOnScreen.z);
-
-            // Translate Mouse to Screen Coordinates.
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(screenPoint);
+            Vector3 worldPoint = InputMouse.Instance.worldPosition;
             this.transform.position = worldPoint + this.offset;
 
             // Apply Level Boundaries
