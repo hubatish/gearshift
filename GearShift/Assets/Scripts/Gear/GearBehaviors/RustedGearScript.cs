@@ -36,14 +36,19 @@ public class RustedGearScript : MonoBehaviour {
 		if (!turnChecked) {
 			if (maxMovesTillDeletion ==  2) { // Only seems to delete here, check...
 				//print ("Probability at turn 3 = " + probDel);
-				if (probDel <= 15)
+				if (probDel <= 15){
+					gearCounter.removeGear();
 					Destroy (this.gameObject);
+				}
 			} else if (maxMovesTillDeletion == 1) {
 				//print ("Probability at turn 4 = " + probDel);
-				if (probDel <= 40)
+				if (probDel <= 40){
+					gearCounter.removeGear();
 					Destroy (this.gameObject);
+				}
 			} else if (maxMovesTillDeletion == 0) {
 				//print ("Broken on turn 5");
+				gearCounter.removeGear();
 				Destroy (this.gameObject);
 			}
 			turnChecked = true;
