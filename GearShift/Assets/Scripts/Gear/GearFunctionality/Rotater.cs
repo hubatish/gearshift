@@ -86,23 +86,34 @@ public class Rotater : MonoBehaviour
 
     protected void OnTriggerEnter(Collider col)
     {
+        if(!enabled)
+        {
+            return;
+        }
         //Attach the next gear
         Rotater other = col.GetComponent<Rotater>();
-        bool newGear = (attachedGears.Count == 0);
-        //we have at least some of the same teeth, so become connected
-        attachedGears.Add(other);
-        if(newGear)
-        {
-            //Only check connection when new gears are added
-            CheckConnectionToRoot();
-        }
+		if(other!=null)
+		{
+			bool newGear = (attachedGears.Count == 0);
+			//become connected
+			attachedGears.Add(other);
+			if(newGear)
+			{
+				//Only check connection when new gears are added
+				CheckConnectionToRoot();
+			}
+		}
     }
 
     protected void OnTriggerExit(Collider col)
     {
+        if (!enabled)
+        {
+            return;
+        }
         //Unattach the gear
         Rotater other = col.GetComponent<Rotater>();
-        if(attachedGears.Contains(other))
+        if(other!=null && attachedGears.Contains(other))
         {
             //We were connected, break that connection
             attachedGears.Remove(other);
