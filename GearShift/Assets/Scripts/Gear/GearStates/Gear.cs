@@ -39,8 +39,8 @@ namespace GearShift
         {
             if (state == null)
             {
-                // Set to Null if none exists. Prefab Gear defaults to Toolbox on create.
-                state = gameObject.GetComponent<NullGearState>();
+                // defaults to Toolbox on create.
+                state = gameObject.GetComponent<ToolBoxGearState>();
             }
 
             //Make sure Activate is called for starting script.

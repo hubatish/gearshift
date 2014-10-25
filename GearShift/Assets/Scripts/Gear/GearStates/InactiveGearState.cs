@@ -6,11 +6,8 @@ using UnityEngine;
 
 namespace GearShift
 {
-    /// <summary>
-    /// State of gear when gear is in ToolBox
-    /// Changes layer to show up above the GUI
-    /// </summary>
-    public class NullGearState : GearState
+    // State for Null gears that have been placed, and will no longer be moveable or deleteable
+    public class InactiveGearState : GearState
     {
         protected override void Awake()
         { base.Awake(); }

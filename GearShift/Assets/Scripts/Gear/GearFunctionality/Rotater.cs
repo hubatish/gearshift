@@ -41,7 +41,7 @@ public class Rotater : MonoBehaviour
     public bool rootGear = false;
 
     //Attached obstacle to tell whether we're attached or not
-    protected Obstacle obstacle;
+    public Obstacle obstacle;
 
     protected void Start()
     {
@@ -84,12 +84,10 @@ public class Rotater : MonoBehaviour
         transform.Rotate(Vector3.up * Time.deltaTime * toRotate);
     }
 
+	/// When colliding with another gear, record that gear in a list
+	/// Each Gear calls this...
     protected void OnTriggerEnter(Collider col)
     {
-        if(!enabled)
-        {
-            return;
-        }
         //Attach the next gear
         Rotater other = col.GetComponent<Rotater>();
 		if(other!=null)
@@ -105,25 +103,56 @@ public class Rotater : MonoBehaviour
 		}
     }
 
+	/// When another gear leaves, remove that gear from our list
     protected void OnTriggerExit(Collider col)
     {
-        if (!enabled)
-        {
-            return;
-        }
         //Unattach the gear
         Rotater other = col.GetComponent<Rotater>();
-        if(other!=null && attachedGears.Contains(other))
+        if(other!=null)
+		{
+			DetachFrom(other);
+		}
+    }
+	
+	/// Actually remove the other collider from our list
+	/// 	And check to see if we should rotate
+	///		Separated from OnTriggerExit so it can be called by other things
+	public void DetachFrom(Rotater other)
+	{
+		if (attachedGears.Contains(other))
         {
             //We were connected, break that connection
             attachedGears.Remove(other);
 
             CheckConnectionToRoot();
         }
-    }
+	}
+	
+	protected bool appIsQuitting = false;
+	//Don't call OnDestroy when application is quitting, so record that bool here
+	protected void OnApplicationQuit()
+	{
+		appIsQuitting = true;
+	}
+	
+	//Remove myself from all the other gears
+	protected void OnDestroy()
+	{
+		//Let's not get errors about other objects already being destroyed
+		if(appIsQuitting)
+			return;
+		foreach(Rotater gear in attachedGears)
+		{
+			//Just in case two gears are destroyed at the same time
+			if(gear!=null)
+			{
+				gear.DetachFrom(this);
+			}
+		}
+	}
 
     /// <summary>
-    /// Recursively walk the tree of connected gears until one is found that is the root gear or all gears in the chain are walked
+    /// Recursively walk the graph of connected gears until one is found that is the root gear or all gears in the chain are walked
     /// With side effects of starting to rotate if connected, or stopping if not
     /// </summary>
     /// <param name="gears">Rotater's in this list have already been checked - don't check again</param>
@@ -150,12 +179,7 @@ public class Rotater : MonoBehaviour
             if (gear.CheckConnectionToRoot(checkedGears))
             {
                 //We are connected!
-                isRotating = true;
-                clockwise = !gear.clockwise;
-                if(obstacle!=null)
-                {
-                    obstacle.PowerOn();
-                }
+				PowerOn(gear);
                 return true;
             }
             else
@@ -166,12 +190,27 @@ public class Rotater : MonoBehaviour
             }
         }
         //We aren't connected to the root gear
-        isRotating = false;
-        if(obstacle!=null)
-        {
-            obstacle.PowerOff();
-        }
+		PowerOff ();
         return false;
     }
 
+	public void PowerOn(Rotater gear)
+	{
+		isRotating = true;
+		clockwise = !gear.clockwise;
+		if(obstacle!=null)
+		{
+			obstacle.PowerOn();
+		}
+	}
+
+	public void PowerOff()
+	{
+		isRotating = false;
+		if(obstacle!=null)
+		{
+			obstacle.PowerOff();
+		}
+	}
+	
 }
