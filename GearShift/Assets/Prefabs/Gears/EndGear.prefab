@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 20
   rootGear: 0
+  obstacle: {fileID: 0}
   clockwise: 1
 --- !u!114 &11400004
 MonoBehaviour:
