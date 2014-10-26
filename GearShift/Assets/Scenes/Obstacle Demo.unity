@@ -1278,7 +1278,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1230458862}
   - 33: {fileID: 1230458861}
-  - 64: {fileID: 1230458860}
   - 23: {fileID: 1230458859}
   m_Layer: 10
   m_Name: LevelPlane
@@ -1308,20 +1307,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &1230458860
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6400000, guid: 06106d3af83ef0b4ba8265d8e53331bd,
-    type: 2}
-  m_PrefabInternal: {fileID: 1929002529}
-  m_GameObject: {fileID: 1230458858}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1230458861
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1338,7 +1323,7 @@ Transform:
   m_GameObject: {fileID: 1230458858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 987818066}
   m_RootOrder: 1
@@ -1407,7 +1392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!124 &1411933094
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1732,7 +1717,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 06106d3af83ef0b4ba8265d8e53331bd, type: 2}
   m_RootGameObject: {fileID: 987818065}
   m_IsPrefabParent: 0
