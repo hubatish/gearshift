@@ -228,17 +228,17 @@ MonoBehaviour:
     m_RichText: 1
     m_TextClipping: 0
     m_ImagePosition: 0
-    m_ContentOffset: {x: 60, y: 0}
+    m_ContentOffset: {x: 0, y: 0}
     m_FixedWidth: 0
     m_FixedHeight: 0
     m_StretchWidth: 0
     m_StretchHeight: 0
-  pos:
+  counterPos:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 256
-    height: 128
+    x: 10
+    y: 53
+    width: 1504
+    height: 100
 --- !u!1 &121075375
 GameObject:
   m_ObjectHideFlags: 0
