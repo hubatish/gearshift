@@ -415,19 +415,19 @@ Prefab:
       objectReference: {fileID: 2800000, guid: 2828c5a9c9526314c940c06268982095, type: 3}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[0].x
-      value: -8.5
+      value: -8.52499962
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[1].x
-      value: -8.5
+      value: -8.52499962
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[2].x
-      value: -8.5
+      value: -8.52499962
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[3].x
-      value: -8.5
+      value: -8.52499962
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[0].z
@@ -439,7 +439,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[4].x
-      value: -8.5
+      value: -8.52499962
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f146257f87410549a1ee1c609355863, type: 2}
       propertyPath: spawnpoints.Array.data[4].z
@@ -1115,7 +1115,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1089242790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.5, y: .00100000005, z: .875}
+  m_LocalPosition: {x: -9.55000019, y: .00100000005, z: .875}
   m_LocalScale: {x: .25, y: .125, z: .125}
   m_Children: []
   m_Father: {fileID: 519590106}
@@ -2037,8 +2037,8 @@ MonoBehaviour:
   - {fileID: 100002, guid: e1926c1c1ebb88045aaba06b09071fa2, type: 2}
   spawnProbability: 0700000003000000020000000200000001000000
   spawnpoints:
-  - {x: -8.5, y: 0, z: -3.5}
-  - {x: -8.5, y: 0, z: -1.75}
-  - {x: -8.5, y: 0, z: 0}
-  - {x: -8.5, y: 0, z: 1.75}
-  - {x: -8.5, y: 0, z: 3.5}
+  - {x: -8.52499962, y: 0, z: -3.5}
+  - {x: -8.52499962, y: 0, z: -1.75}
+  - {x: -8.52499962, y: 0, z: 0}
+  - {x: -8.52499962, y: 0, z: 1.75}
+  - {x: -8.52499962, y: 0, z: 3.5}
