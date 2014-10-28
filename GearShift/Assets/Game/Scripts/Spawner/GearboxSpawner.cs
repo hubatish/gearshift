@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class GearboxSpawner : MonoBehaviour {
 	public GameObject[] gearList;
 	public int[] spawnProbability;
-	public Vector3[] spawnpoints = new Vector3[4];
+	public Vector3[] spawnpoints = new Vector3[5];
 	List<GameObject> probabilitySpawnList = new List<GameObject>();
 	List<GameObject> createdGears = new List<GameObject>();
 
@@ -22,13 +22,13 @@ public class GearboxSpawner : MonoBehaviour {
 			}
 		}
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			createdGears.Add(spawnGear(i));
 		}
 	}
 
 	void Update(){
-		for (int i = 3; i >= 0; i--) {
+		for (int i = 4; i >= 0; i--) {
 			if(createdGears[i].layer == LayerMask.NameToLayer ("Default")){
 				createdGears[i] = spawnGear(i);
 			}
@@ -37,7 +37,7 @@ public class GearboxSpawner : MonoBehaviour {
 
 	GameObject spawnGear(int i){
 		GameObject randomGear = getRandomGear();
-		GameObject newGear = Instantiate (randomGear, spawnpoints [i], transform.rotation) as GameObject;
+		GameObject newGear = Instantiate (randomGear, spawnpoints [i], Quaternion.identity) as GameObject;
 		return newGear;
 	}
 

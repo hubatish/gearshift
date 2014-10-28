@@ -14,7 +14,7 @@ namespace GearShift
     {
         protected Vector3 pointOnScreen;
 
-        protected void Awake()
+        public override void Awake()
         {
             pointOnScreen = Camera.main.WorldToScreenPoint(transform.position);
             base.Awake();

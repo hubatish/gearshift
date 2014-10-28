@@ -21,7 +21,7 @@ namespace GearShift
                 }
 			}
 			//change state to off and close/move
-			public void PowerOff()
+			public override void PowerOff()
 			{
 				on = false;
 			}
