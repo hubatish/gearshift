@@ -12,6 +12,8 @@ public class GearboxSpawner : MonoBehaviour {
 	List<GameObject> probabilitySpawnList = new List<GameObject>();
 	List<GameObject> createdGears = new List<GameObject>();
 
+    protected int numGearsSpawned = 0;
+
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,9 @@ public class GearboxSpawner : MonoBehaviour {
 	GameObject spawnGear(int i){
 		GameObject randomGear = getRandomGear();
 		GameObject newGear = Instantiate (randomGear, spawnpoints [i], Quaternion.identity) as GameObject;
+        //name the gear for helpful debugging ness
+        numGearsSpawned += 1;
+        newGear.name += numGearsSpawned.ToString();
 		return newGear;
 	}
 

@@ -59,7 +59,7 @@ public class Rotater : MonoBehaviour
     public bool clockwise = true;
 
     //What gears are we attached to?
-    protected List<Rotater> attachedGears = new List<Rotater>();
+    public List<Rotater> attachedGears = new List<Rotater>();
 
     protected void Update()
     {
@@ -92,14 +92,33 @@ public class Rotater : MonoBehaviour
         Rotater other = col.GetComponent<Rotater>();
 		if(other!=null)
 		{
-			bool newGear = (attachedGears.Count == 0);
-			//become connected
+			//record that we're connected
 			attachedGears.Add(other);
-			if(newGear)
-			{
-				//Only check connection when new gears are added
-				CheckConnectionToRoot();
-			}
+
+            //has this gear been placed - don't do stuff for HeldGear
+            if(enabled && other.enabled)
+            {
+                //I'm not rotating but connected gear is
+                if(other.isRotating && !isRotating)
+                {
+                    PowerOn(other);
+                }
+                //rotate the other guy if we are and he isn't
+                else if(isRotating && !other.isRotating)
+                {
+                    other.PowerOn(this);
+                }
+                //we're both rotating - this might be a fail case
+                else if(isRotating && other.isRotating)
+                {
+                    //are we rotating the same direction?
+                    if(clockwise == other.clockwise)
+                    {
+                        //FAIL CASE!!  Probably break one of the gears
+                        GameObject.Destroy(gameObject);
+                    }
+                }
+            }
 		}
     }
 
@@ -124,7 +143,8 @@ public class Rotater : MonoBehaviour
             //We were connected, break that connection
             attachedGears.Remove(other);
 
-            CheckConnectionToRoot();
+            //We need to check to see if we're still connected, or if the gear that was removed was what connecting us
+            CheckMyConnection();
         }
 	}
 	
@@ -151,36 +171,60 @@ public class Rotater : MonoBehaviour
 		}
 	}
 
+
+    //An invokable public method to call CheckConnectionToRoot
+    //Called by InPlaceGearState when a gear is placed
+    protected void BePlaced()
+    {
+        CheckMyConnection();
+    }
+
+    public void CheckMyConnection()
+    {
+        Rotater connectingGear = CheckConnectionToRoot();
+        
+        if(connectingGear!=null)
+        {
+            PowerOn(connectingGear);
+        }
+        else
+        {
+            PowerOff();
+        }
+    }
+
     /// <summary>
     /// Recursively walk the graph of connected gears until one is found that is the root gear or all gears in the chain are walked
     /// With side effects of starting to rotate if connected, or stopping if not
     /// </summary>
     /// <param name="gears">Rotater's in this list have already been checked - don't check again</param>
     /// <returns>true if the chain is connected to the root gear</returns>
-    public bool CheckConnectionToRoot(List<Rotater> checkedGears = null)
+    public Rotater CheckConnectionToRoot(List<Rotater> checkedGears = null)
     {
+        if (rootGear)
+        {
+            //I am the root, whatever called this is connected
+            //Debug.Log("the great root is found");
+            return this;
+        }
+
         if (checkedGears == null)
         {
             //Initialize default arguments (ie, checking starting with me)
             checkedGears = new List<Rotater>();
         }
-        if (rootGear)
-        {
-            //I am the root, whatever called this is connected
-            return true;
-        }
         //Get all attached gears that haven't been checked yet
-        IEnumerable<Rotater> unCheckedGears = attachedGears.Where(gear => !checkedGears.Contains(gear));
+        List<Rotater> unCheckedGears = attachedGears.Where(gear => !checkedGears.Contains(gear)).ToList();
 
         //Add myself to checked gears and recurse
         checkedGears.Add(this);
+
         foreach (Rotater gear in unCheckedGears)
         {
-            if (gear.CheckConnectionToRoot(checkedGears))
+            if (gear.CheckConnectionToRoot(checkedGears)!=null)
             {
-                //We are connected!
-				PowerOn(gear);
-                return true;
+                //PowerOn(gear);
+                return gear;
             }
             else
             {
@@ -189,12 +233,12 @@ public class Rotater : MonoBehaviour
                 checkedGears.Add(gear);
             }
         }
-        //We aren't connected to the root gear
-		PowerOff ();
-        return false;
+        return null;            
     }
 
-	public void PowerOn(Rotater gear)
+    //Power myself up, tell any obstacles attached
+    //  And power up any attached gears that aren't powered yet
+    public void PowerOn(Rotater gear)
 	{
 		isRotating = true;
 		clockwise = !gear.clockwise;
@@ -202,8 +246,18 @@ public class Rotater : MonoBehaviour
 		{
 			obstacle.PowerOn();
 		}
+
+        //Power on unpowered attached gears
+        foreach (Rotater attached in attachedGears)
+        {
+            if(!attached.isRotating)
+            {
+                attached.PowerOn(this);
+            }
+        }
 	}
 
+    //Just power off and tell the obstacle we did so
 	public void PowerOff()
 	{
 		isRotating = false;
@@ -211,6 +265,16 @@ public class Rotater : MonoBehaviour
 		{
 			obstacle.PowerOff();
 		}
+
+        //Power off nearby powered attached gears
+        foreach (Rotater attached in attachedGears)
+        {
+            if (attached.isRotating)
+            {
+                attached.PowerOff();
+            }
+        }
+
 	}
 	
 }

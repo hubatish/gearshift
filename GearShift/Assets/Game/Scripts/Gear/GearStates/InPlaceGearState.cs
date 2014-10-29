@@ -51,7 +51,9 @@ namespace GearShift
             rigidbody.isKinematic = true;
             capsule.radius *= bigger;
             //Start the rotation scripts
-            rotater.enabled = true;		
+            rotater.enabled = true;
+            //Only let it check connection when placed
+            rotater.Invoke("BePlaced",2*Time.deltaTime);
 
 			// Eventually, the "Placed Gear" tag definition should be moved to LockedGearState
 			this.tag = "Placed Gear";
