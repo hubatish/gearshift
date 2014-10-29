@@ -555,8 +555,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
   m_PrefabInternal: {fileID: 1107612798}
   m_GameObject: {fileID: 729515950}
-  m_LocalRotation: {x: 0, y: -.811750233, z: 0, w: .584004819}
-  m_LocalPosition: {x: 3.93055034, y: .5, z: -1.64942396}
+  m_LocalRotation: {x: 0, y: -.760516763, z: 0, w: .649318397}
+  m_LocalPosition: {x: 3.37374878, y: .5, z: -1.82011545}
   m_LocalScale: {x: 2.78237295, y: 1, z: .280011028}
   m_Children: []
   m_Father: {fileID: 617257233}
@@ -833,7 +833,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ba287973e21629d4b8b8c885debb3515, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 13600000, guid: ba287973e21629d4b8b8c885debb3515, type: 2}
       propertyPath: m_Radius
@@ -1007,6 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedWall: {fileID: 1632363735}
+  distance: 133
 --- !u!114 &990961254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,7 +1207,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.93055034
+      value: 3.37374878
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1214,7 +1215,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.64942396
+      value: -1.82011545
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1222,7 +1223,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -.811750233
+      value: -.760516763
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1230,7 +1231,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .584004819
+      value: .649318397
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ec3a07e318ffbbb418e215b974666999, type: 2}
       propertyPath: m_RootOrder

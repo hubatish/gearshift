@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -7,25 +7,68 @@ using UnityEngine;
 namespace GearShift
 {
 	public class Gate : Obstacle
+	{
+		public Wall linkedWall;
+
+		//similar to on state from obstacle, but needs to be initialized to null
+		protected bool? powered = null;
+		protected bool flag = false;
+		public float distance = 133;
+
+		
+
+		//change state to on and open/move the amount determined by distance
+		public override void PowerOn()
 		{
-			public Wall linkedWall;
-			
-			//change state to on and open/move
-			public override void PowerOn()
+
+			float localDistance = 0;
+			//make sure gear isn't already powered and extended
+			if (powered != true) 
 			{
+				while (localDistance < distance)
+				{
+					ChangePositionOn();
+					localDistance = localDistance + 1;
+				}
+				flag = true;
+				powered = true;
 				on = true;
-                //Debug.Log("i tried to kill it0");
-				if(linkedWall!=null)
-                {
-                    GameObject.Destroy(linkedWall.gameObject);	
-                }
+
 			}
-			//change state to off and close/move
-			public override void PowerOff()
-			{
-				on = false;
-			}
+
 			
 		}
+		//change state to off and close/move
+		public override void PowerOff()
+		{
+
+			float localDistance = 0;
+			//make sure gear was previously powered/extended
+			if (powered != false) 
+				{
+					while (localDistance < distance) 
+					{
+						ChangePositionOff();
+						localDistance = localDistance + 1;
+					}
+					on = false;
+					powered = false;
+				}
+
+		}
+		
+		protected void ChangePositionOn()
+		{
+			linkedWall.transform.Translate (Vector3.right * Time.deltaTime);
+		}
+		
+		protected void ChangePositionOff()
+		{
+			linkedWall.transform.Translate (Vector3.left * Time.deltaTime);
+		}
+
+		
+		
+	}
 }
 
