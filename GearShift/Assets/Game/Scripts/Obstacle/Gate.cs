@@ -44,7 +44,7 @@ namespace GearShift
 
 			float localDistance = 0;
 			//make sure gear was previously powered/extended
-			if (powered != false) 
+			if (powered != null) 
 				{
 					while (localDistance < distance) 
 					{
@@ -59,12 +59,12 @@ namespace GearShift
 		
 		protected void ChangePositionOn()
 		{
-			linkedWall.transform.Translate (Vector3.right * Time.deltaTime);
+			linkedWall.transform.Translate (Vector3.back * Time.deltaTime);
 		}
 		
 		protected void ChangePositionOff()
 		{
-			linkedWall.transform.Translate (Vector3.left * Time.deltaTime);
+			linkedWall.transform.Translate (Vector3.forward * Time.deltaTime);
 		}
 
 		
