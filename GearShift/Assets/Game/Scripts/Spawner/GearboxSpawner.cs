@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using GearShift;
 
 /// <summary>
 /// Spawns gears and puts them in the toolbox at spawnpoints array locations
@@ -14,6 +15,7 @@ public class GearboxSpawner : MonoBehaviour {
 
     protected int numGearsSpawned = 0;
 
+    public LayerController layers;
 
 	// Use this for initialization
 	void Start () {
@@ -38,11 +40,17 @@ public class GearboxSpawner : MonoBehaviour {
 	}
 
 	GameObject spawnGear(int i){
+        //spawn a gear at the correct spawn point
 		GameObject randomGear = getRandomGear();
-		GameObject newGear = Instantiate (randomGear, spawnpoints [i], Quaternion.identity) as GameObject;
-        //name the gear for helpful debugging ness
+        Vector3 adjustedSpawnPoint = new Vector3(spawnpoints[i].x, layers.getCurrentY(), spawnpoints[i].z);
+		GameObject newGear = Instantiate (randomGear, adjustedSpawnPoint, Quaternion.identity) as GameObject;
+
+        //name and organize the gears for debugging and layers
         numGearsSpawned += 1;
         newGear.name += numGearsSpawned.ToString();
+        //temporarily put gears under myself
+        newGear.transform.parent = transform;
+
 		return newGear;
 	}
 

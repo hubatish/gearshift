@@ -57,6 +57,8 @@ namespace GearShift
 
 			// Eventually, the "Placed Gear" tag definition should be moved to LockedGearState
 			this.tag = "Placed Gear";
+            //organize myself in the scene
+            transform.parent = GearParent.Instance.gearParent;
         }
         public override void Deactivate()
         {
