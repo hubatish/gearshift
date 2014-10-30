@@ -40,8 +40,8 @@ namespace GearShift
 		{
 			// define here the original resolution
 			// you used to create the GUI contents
-			defaultWidth = 1024.0f;
-			defaultHeight = 768.0f;
+			defaultWidth = 900f;//1024.0f;
+			defaultHeight = 600f;//768.0f;
 			
 			screenScale = Vector3.zero;
 		}

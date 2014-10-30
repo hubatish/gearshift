@@ -15,8 +15,9 @@ namespace GearShift
 
 		void OnMouseDown()
 		{
-			if (scene != null)
-			{ Application.LoadLevel((scene).name); }
+			/*if (scene != null)
+			{ Application.LoadLevel((scene).name); }*/
+			Application.LoadLevel (1);
 		}
 	}
 }
