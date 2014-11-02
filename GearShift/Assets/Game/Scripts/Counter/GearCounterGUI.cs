@@ -18,7 +18,7 @@ public class GearCounterGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		destroyText = "Gears Destroyed: " + gearCounter.gearsRemoved.ToString(); // not destroyed though?
+		destroyText = "Destroyed: " + gearCounter.gearsRemoved.ToString(); // not destroyed though?
 		counterPos = new Rect(10, Screen.height/6, Screen.width-20, 100);
 	}
 

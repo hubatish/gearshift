@@ -5,11 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/testGui.unity
-  - enabled: 0
-    path: Assets/Game/Scenes/ObstacleDemo.unity
   - enabled: 1
     path: Assets/Menu/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Game/Scenes/LayerGreatness.unity
+    path: Assets/Game/Scenes/GateTutorialLevelV1.unity
