@@ -185,6 +185,7 @@ MonoBehaviour:
   rootGear: 0
   obstacle: {fileID: 0}
   clockwise: 1
+  attachedGears: []
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,7 +242,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .100000001
+  m_Radius: .119999997
   m_Height: .218999997
   m_Direction: 1
   m_Center: {x: 0, y: .00700000022, z: 0}

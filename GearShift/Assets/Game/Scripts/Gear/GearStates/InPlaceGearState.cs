@@ -16,23 +16,6 @@ namespace GearShift
         protected HeldGearState holder;
         protected Rotater rotater;
 
-        //When activated, make the collider smaller to squeeze in next to other gears
-        public float bigger = 1.25f;
-        //The CapsuleCollider attached to this gameobject
-        //Using a getter to only find the collider if/when we need it
-        protected CapsuleCollider capsule
-        {
-            get
-            {
-                if (_capsule == null)
-                {
-                    _capsule = gameObject.GetComponent<CapsuleCollider>();
-                }
-                return _capsule;
-            }
-        }
-        private CapsuleCollider _capsule;
-
         protected override void Awake()
         {
             //Find components we need
@@ -45,11 +28,11 @@ namespace GearShift
         {
             master.ChangeState(holder);
         }
+
         public override void Activate()
         {
             //resize my collider and let the gear pass through other objects
             rigidbody.isKinematic = true;
-            capsule.radius *= bigger;
             //Start the rotation scripts
             rotater.enabled = true;
             //Only let it check connection when placed
@@ -64,7 +47,6 @@ namespace GearShift
         {
             //set collider back to original size and make it solid again
             rigidbody.isKinematic = false;
-            capsule.radius /= bigger;
             //Deactivate the rotation scripts
             rotater.enabled = false;
         }

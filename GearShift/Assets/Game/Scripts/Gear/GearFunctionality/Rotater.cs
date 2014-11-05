@@ -240,6 +240,10 @@ public class Rotater : MonoBehaviour
     //  And power up any attached gears that aren't powered yet
     public void PowerOn(Rotater gear)
 	{
+        if(isRotating)
+        {
+            return;
+        }
 		isRotating = true;
 		clockwise = !gear.clockwise;
 		if(obstacle!=null)

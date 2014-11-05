@@ -824,7 +824,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 03f1386991ad32a4baa5c6a1eabe2105, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 03f1386991ad32a4baa5c6a1eabe2105, type: 2}
       propertyPath: m_Icon
@@ -834,6 +834,10 @@ Prefab:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 2800000, guid: c036c37d69475b340ba4c3cf0149a0e1, type: 3}
+    - target: {fileID: 13600000, guid: 03f1386991ad32a4baa5c6a1eabe2105, type: 2}
+      propertyPath: m_Radius
+      value: .119999997
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03f1386991ad32a4baa5c6a1eabe2105, type: 2}
   m_RootGameObject: {fileID: 1914097000}
@@ -3412,7 +3416,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .100000001
+  m_Radius: .119999997
   m_Height: .218999997
   m_Direction: 1
   m_Center: {x: 0, y: .00700000022, z: 0}
@@ -3668,7 +3672,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .100000001
+  m_Radius: .119999997
   m_Height: .218999997
   m_Direction: 1
   m_Center: {x: 0, y: .00700000022, z: 0}
