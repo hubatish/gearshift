@@ -34,7 +34,7 @@ namespace GearShift
         public override void Release()
         {
             GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear();
-            //check for collisions
+            //check for numCollisions
             master.ChangeState(inPlace);
         }
         public override void Activate()
@@ -60,7 +60,7 @@ namespace GearShift
         /**********************/
         /**    Model Data    **/
         /**********************/
-        private int collisions;
+        private int numCollisions;
 
         private Vector3 offset;
 
@@ -75,7 +75,7 @@ namespace GearShift
         /**********************/
         private bool isValidLocation()
         {
-            if (this.collisions > 0)
+            if (this.numCollisions > 0)
             { return false; }
             else
             { return true; }
@@ -103,7 +103,7 @@ namespace GearShift
         protected void Start()
         {
             //Using this rather than Activate for clarity
-            collisions = 0;
+            numCollisions = 0;
             lastPosition = transform.position;
             Vector3 fullOffset = transform.position - InputMouse.Instance.worldPosition;
             offset = new Vector3(fullOffset.x, 0, fullOffset.z);
@@ -132,19 +132,6 @@ namespace GearShift
             Vector3 worldPoint = InputMouse.Instance.worldPosition;
             this.transform.position = worldPoint + this.offset;
 
-/*            // Apply Level Boundaries
-            if (transform.position.x < -boundaryDistance)
-            { this.setXPosition(-boundaryDistance); }
-
-            if (transform.position.x > boundaryDistance)
-            { this.setXPosition(boundaryDistance); }
-
-            if (transform.position.z < -boundaryDistance)
-            { this.setZPosition(-boundaryDistance); }
-
-            if (transform.position.z > boundaryDistance)
-            { this.setZPosition(boundaryDistance); }*/
-
             // Check if location is valid.
             if (isValidLocation())
             {
@@ -166,16 +153,18 @@ namespace GearShift
 
         // Called when two gears collide.
         // Record the number of gears we're hitting
-        void OnTriggerEnter()
+        void OnTriggerEnter(Collider col)
         {
-            collisions = collisions + 1;
+            numCollisions = numCollisions + 1;
+            //Debug.Log("we collided with "+col.gameObject.name);
         }
 
         // Called when two gears separate.
         // Decrease number of gears hitting
-        void OnTriggerExit()
+        void OnTriggerExit(Collider col)
         {
-            collisions = collisions - 1;
+            numCollisions = numCollisions - 1;
+            //Debug.Log("we just left" + col.gameObject.name);
         }
     }
 }
