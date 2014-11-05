@@ -729,6 +729,7 @@ MonoBehaviour:
   rootGear: 0
   obstacle: {fileID: 0}
   clockwise: 1
+  currentRotation: 0
   attachedGears: []
 --- !u!136 &403760527
 CapsuleCollider:
@@ -2383,6 +2384,7 @@ MonoBehaviour:
   rootGear: 0
   obstacle: {fileID: 0}
   clockwise: 1
+  currentRotation: 0
   attachedGears: []
 --- !u!136 &1236493294
 CapsuleCollider:
@@ -3370,6 +3372,7 @@ GameObject:
   - 136: {fileID: 1793325321}
   - 114: {fileID: 1793325320}
   - 114: {fileID: 1793325319}
+  - 114: {fileID: 1793325327}
   m_Layer: 0
   m_Name: StartGear
   m_TagString: Untagged
@@ -3405,6 +3408,7 @@ MonoBehaviour:
   rootGear: 1
   obstacle: {fileID: 0}
   clockwise: 1
+  currentRotation: 0
   attachedGears: []
 --- !u!136 &1793325321
 CapsuleCollider:
@@ -3494,6 +3498,18 @@ Transform:
   - {fileID: 1361828161}
   m_Father: {fileID: 617257233}
   m_RootOrder: 2
+--- !u!114 &1793325327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 4cc687299e5621f4786b5332274d9499,
+    type: 2}
+  m_PrefabInternal: {fileID: 475852626}
+  m_GameObject: {fileID: 1793325318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb70fc82a11c2b419ee25121e63f18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1831774627
 GameObject:
   m_ObjectHideFlags: 0
@@ -3625,6 +3641,7 @@ GameObject:
   - 136: {fileID: 1914097003}
   - 114: {fileID: 1914097002}
   - 114: {fileID: 1914097001}
+  - 114: {fileID: 1914097009}
   m_Layer: 0
   m_Name: EndGear
   m_TagString: Untagged
@@ -3661,6 +3678,7 @@ MonoBehaviour:
   rootGear: 0
   obstacle: {fileID: 0}
   clockwise: 1
+  currentRotation: 0
   attachedGears: []
 --- !u!136 &1914097003
 CapsuleCollider:
@@ -3751,6 +3769,18 @@ Transform:
   - {fileID: 1739593719}
   m_Father: {fileID: 617257233}
   m_RootOrder: 0
+--- !u!114 &1914097009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 03f1386991ad32a4baa5c6a1eabe2105,
+    type: 2}
+  m_PrefabInternal: {fileID: 439800161}
+  m_GameObject: {fileID: 1914097000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb70fc82a11c2b419ee25121e63f18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1928859586
 Prefab:
   m_ObjectHideFlags: 0

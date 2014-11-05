@@ -57,6 +57,7 @@ public class Rotater : MonoBehaviour
 
     //which direciton are we rotating?
     public bool clockwise = true;
+    public float currentRotation = 0;
 
     //What gears are we attached to?
     public List<Rotater> attachedGears = new List<Rotater>();
@@ -81,6 +82,7 @@ public class Rotater : MonoBehaviour
             toRotate = -toRotate;
         }
         //Rotate around the y axis
+        currentRotation += Time.deltaTime * toRotate;
         transform.Rotate(Vector3.up * Time.deltaTime * toRotate);
     }
 
@@ -250,6 +252,12 @@ public class Rotater : MonoBehaviour
 		{
 			obstacle.PowerOn();
 		}
+
+        Orientation orientation = gameObject.GetComponent<Orientation>();
+        float degree = orientation.GetDegreeOffset(gear.gameObject);
+        transform.rotation = Quaternion.identity;
+        transform.Rotate(Vector3.up * degree);
+        currentRotation = 0;
 
         //Power on unpowered attached gears
         foreach (Rotater attached in attachedGears)
