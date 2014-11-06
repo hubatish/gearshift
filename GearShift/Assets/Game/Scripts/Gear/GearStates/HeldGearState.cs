@@ -79,10 +79,7 @@ namespace GearShift
         /**********************/
         private bool isValidLocation()
         {
-            if (this.numCollisions > 0)
-            { return false; }
-            else
-            { return true; }
+            return (numCollisions == 0) ;
         }
 
         /**********************/
@@ -169,6 +166,10 @@ namespace GearShift
         void OnTriggerExit(Collider col)
         {
             numCollisions = numCollisions - 1;
+            if(numCollisions<0)
+            {
+                numCollisions = 0;
+            }
             //Debug.Log("we just left" + col.gameObject.name);
         }
     }
