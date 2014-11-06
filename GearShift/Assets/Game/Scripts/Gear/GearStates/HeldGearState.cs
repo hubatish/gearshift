@@ -14,6 +14,7 @@ namespace GearShift
     {
         //The state that we're going to change to
         protected InPlaceGearState inPlace;
+		protected LockedGearState locked;
         //The CapsuleCollider attached to this gameobject
         //Using a getter to only find the collider if/when we need it
         protected CapsuleCollider capsule
@@ -33,9 +34,12 @@ namespace GearShift
 
         public override void Release()
         {
-            GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear();
+            GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear(inPlace);
             //check for numCollisions
-            master.ChangeState(inPlace);
+			if (this.tag == "Null Gear")
+			{ master.ChangeState(locked); }
+			else
+            { master.ChangeState(inPlace); }
         }
         public override void Activate()
         {
@@ -75,7 +79,10 @@ namespace GearShift
         /**********************/
         private bool isValidLocation()
         {
-            return (numCollisions == 0);
+            if (this.numCollisions > 0)
+            { return false; }
+            else
+            { return true; }
         }
 
         /**********************/
@@ -104,13 +111,13 @@ namespace GearShift
             lastPosition = transform.position;
             Vector3 fullOffset = transform.position - InputMouse.Instance.worldPosition;
             offset = new Vector3(fullOffset.x, 0, fullOffset.z);
-
         }
 
         protected override void Awake()
         {
             //Find needed scripts
             inPlace = gameObject.GetComponent<InPlaceGearState>();
+			locked = gameObject.GetComponent<LockedGearState>();
             base.Awake();
         }
 
@@ -134,7 +141,6 @@ namespace GearShift
             if (isValidLocation())
             {
                 // Lock Coordinates of Gear.
-
                 lastPosition = transform.position;
                 renderer.material.color = Color.green;
             }
@@ -155,7 +161,7 @@ namespace GearShift
         void OnTriggerEnter(Collider col)
         {
             numCollisions = numCollisions + 1;
-            //Debug.Log("we collided with "+col.gameObject.name + " num " + numCollisions);
+            //Debug.Log("we collided with "+col.gameObject.name);
         }
 
         // Called when two gears separate.
@@ -163,11 +169,7 @@ namespace GearShift
         void OnTriggerExit(Collider col)
         {
             numCollisions = numCollisions - 1;
-            if(numCollisions<0)
-            {
-                numCollisions = 0;
-            }
-            //Debug.Log("we just left" + col.gameObject.name + " num " + numCollisions);
+            //Debug.Log("we just left" + col.gameObject.name);
         }
     }
 }
