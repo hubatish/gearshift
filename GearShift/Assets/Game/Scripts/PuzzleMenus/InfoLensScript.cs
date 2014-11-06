@@ -5,16 +5,20 @@ public class InfoLensScript : MonoBehaviour {
 	public Texture2D buttonNeutral, buttonHover, buttonClicked;
 	public GameObject infoScreen;
 
+	void OnEnable(){
+		renderer.material.mainTexture = buttonNeutral;
+	}
+
 	void OnMouseEnter(){
-		guiTexture.texture = buttonHover;
+		renderer.material.mainTexture = buttonHover;
 	}
 
 	void OnMouseExit(){
-		guiTexture.texture = buttonNeutral;
+		renderer.material.mainTexture = buttonNeutral;
 	}
 
 	void OnMouseDown(){
-		guiTexture.texture = buttonClicked;
+		renderer.material.mainTexture = buttonClicked;
 		infoScreen.SetActive (!infoScreen.activeSelf);
 		// Pull up info panel
 	}

@@ -45,10 +45,18 @@ public class GearboxSpawner : MonoBehaviour {
 	}
 
 	GameObject spawnGear(int i){
+		GameObject randomGear;
+		// Make 1st standard only (should be in first slot?)
+		if(i == 4){
+			randomGear = gearList [0];
+		} else {
+			randomGear = getRandomGear();
+		}
+
         //spawn a gear at the correct spawn point
-		GameObject randomGear = getRandomGear();
         Vector3 adjustedSpawnPoint = new Vector3(spawnpoints[i].x, layers.getCurrentY(), spawnpoints[i].z);
 		GameObject newGear = Instantiate (randomGear, adjustedSpawnPoint, Quaternion.identity) as GameObject;
+		//GameObject newGear = Instantiate (randomGear, spawnpoints[i], Quaternion.identity) as GameObject;
 
         //name and organize the gears for debugging and layers
         numGearsSpawned += 1;

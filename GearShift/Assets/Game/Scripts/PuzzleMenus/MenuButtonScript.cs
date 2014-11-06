@@ -5,15 +5,15 @@ public class MenuButtonScript : MonoBehaviour {
 	public Texture2D buttonNeutral, buttonHover, buttonClicked;
 	
 	void OnMouseEnter(){
-		guiTexture.texture = buttonHover;
+		renderer.material.mainTexture = buttonHover;
 	}
 	
 	void OnMouseExit(){
-		guiTexture.texture = buttonNeutral;
+		renderer.material.mainTexture = buttonNeutral;
 	}
 	
 	void OnMouseDown(){
-		guiTexture.texture = buttonClicked;
+		renderer.material.mainTexture = buttonClicked;
 		Application.LoadLevel (0);
 	}
 }

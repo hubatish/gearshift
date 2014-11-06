@@ -9,11 +9,11 @@ public class SoundToggleScript : MonoBehaviour {
 	}
 	
 	void OnMouseDown(){
-		if (guiTexture.texture.name.Contains ("SoundON")) {
-			guiTexture.texture = soundOff;
+		if (renderer.material.mainTexture.name.Contains ("SoundON")) {
+			renderer.material.mainTexture = soundOff;
 			audioObj.audio.Pause();
-		} else if (guiTexture.texture.name.Contains ("SoundOFF")) {
-			guiTexture.texture = soundOn;
+		} else if (renderer.material.mainTexture.name.Contains ("SoundOFF")) {
+			renderer.material.mainTexture = soundOn;
 			audioObj.audio.Play();
 		} else {
 			Debug.LogError("Couldn't toggle sound!");
