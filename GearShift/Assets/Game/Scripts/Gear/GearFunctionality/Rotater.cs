@@ -10,8 +10,6 @@ using GearShift;
 /// Also detects collisions with other gears and decides whether to rotate based on whether they're rotating or not
 /// Probably needs some abstraction to account for different gear teeth, though that could be as simple as an enum
 /// </summary>
-namespace GearShift
-{
 	public class Rotater : MonoBehaviour
 	{
 		//How fast do the gears rotate when turning?
@@ -291,4 +289,3 @@ namespace GearShift
 
 		}
 	}
-}
