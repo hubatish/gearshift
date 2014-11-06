@@ -5,18 +5,14 @@ namespace GearShift
 {
 	public class Orientation : MonoBehaviour
 	{
-
 		private float Radius = .12f;
 		private int TeethCount = 20;
-
 
 		// Use this for initialization
 		void Start()
 		{
 
 		}
-
-
 
 		public float GetDegreeOffset(GameObject otherGear)
 		{
