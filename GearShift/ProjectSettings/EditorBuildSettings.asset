@@ -8,4 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Menu/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Game/Scenes/HelpLensDemo.unity
+    path: Assets/Menu/Scenes/PuzzlesMenu.unity
+  - enabled: 1
+    path: Assets/Game/Scenes/level_1_maze.unity
+  - enabled: 1
+    path: Assets/Game/Scenes/Pylon_puzzle.unity

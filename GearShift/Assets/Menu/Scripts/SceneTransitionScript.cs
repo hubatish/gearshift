@@ -5,7 +5,7 @@ namespace GearShift
 {
 	public class SceneTransitionScript : MonoBehaviour
 	{
-		public Object scene;
+		public int sceneNum;
 
 		// Use this for initialization
 		protected void Start () {}
@@ -15,9 +15,7 @@ namespace GearShift
 
 		void OnMouseDown()
 		{
-			/*if (scene != null)
-			{ Application.LoadLevel((scene).name); }*/
-			Application.LoadLevel (1);
+			Application.LoadLevel(sceneNum);
 		}
 	}
 }
