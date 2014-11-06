@@ -37,7 +37,10 @@ namespace GearShift
             GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear(inPlace);
             //check for numCollisions
 			if (this.tag == "Null Gear")
-			{ master.ChangeState(locked); }
+			{
+				master.ChangeState(locked);
+				GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().setLastGear(null);
+			}
 			else
             { master.ChangeState(inPlace); }
         }
