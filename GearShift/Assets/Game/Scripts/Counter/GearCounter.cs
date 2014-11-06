@@ -36,6 +36,9 @@ namespace GearShift
 		// Removed Gears includes only the gears that were removed by the player.
 		public int gearsRemoved;
 		
+		// The Last In Place Gear. This script is used to lock gears.
+		private InPlaceGearState lastGear = null;
+		
 		/**********************/
 		/**   Initializers   **/
 		/**********************/
@@ -80,16 +83,31 @@ namespace GearShift
 		/**********************/
 		/** Operator Methods **/
 		/**********************/
-		public void addGear()
+		public void addGear(InPlaceGearState gear)
 		{
 			gearsPlaced = gearsPlaced + 1;
 			gearsUsed = gearsUsed + 1;
+			
+			if (gear == null)
+			{ lastGear = null; }
+			else if ((lastGear != null) && (lastGear != gear))
+			{
+				lastGear.Lock();
+				lastGear = gear;
+			}
+			else
+			{ lastGear = gear; }
 		}
 		
 		public void removeGear()
 		{
 			gearsPlaced = gearsPlaced - 1;
 			gearsRemoved = gearsRemoved + 1;
+		}
+		
+		public void setLastGear(InPlaceGearState gear)
+		{
+			lastGear = gear;
 		}
 	}
 }

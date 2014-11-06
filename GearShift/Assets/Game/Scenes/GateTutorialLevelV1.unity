@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: {fileID: 423383347}
+  connectedRotater: {fileID: 0}
 --- !u!114 &136088683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,6 +2296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: {fileID: 1472769268}
+  connectedRotater: {fileID: 0}
 --- !u!114 &1211666707
 MonoBehaviour:
   m_ObjectHideFlags: 0

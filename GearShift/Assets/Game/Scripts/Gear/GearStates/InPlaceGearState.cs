@@ -14,19 +14,30 @@ namespace GearShift
     {
         //The state that we're going to change to
         protected HeldGearState holder;
+		protected LockedGearState locked;
         protected Rotater rotater;
 
         protected override void Awake()
         {
             //Find components we need
             holder = gameObject.GetComponent<HeldGearState>();
+			locked = gameObject.GetComponent<LockedGearState>();
             rotater = gameObject.GetComponent<Rotater>();
             base.Awake();
         }
 
         public override void Click()
         {
-            master.ChangeState(holder);
+			master.ChangeState(holder);
+        }
+		
+		public void Lock()
+        {
+			if (this.tag != "Null Gear")
+			{
+				master.ChangeState(locked);
+				renderer.material.color = Color.gray;
+			}
         }
 
         public override void Activate()

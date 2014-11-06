@@ -14,6 +14,7 @@ namespace GearShift
     {
         //The state that we're going to change to
         protected InPlaceGearState inPlace;
+		protected LockedGearState locked;
         //The CapsuleCollider attached to this gameobject
         //Using a getter to only find the collider if/when we need it
         protected CapsuleCollider capsule
@@ -33,9 +34,12 @@ namespace GearShift
 
         public override void Release()
         {
-            GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear();
+            GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear(inPlace);
             //check for numCollisions
-            master.ChangeState(inPlace);
+			if (this.tag == "Null Gear")
+			{ master.ChangeState(locked); }
+			else
+            { master.ChangeState(inPlace); }
         }
         public override void Activate()
         {
@@ -113,6 +117,7 @@ namespace GearShift
         {
             //Find needed scripts
             inPlace = gameObject.GetComponent<InPlaceGearState>();
+			locked = gameObject.GetComponent<LockedGearState>();
             base.Awake();
         }
 
