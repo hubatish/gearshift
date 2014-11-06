@@ -75,10 +75,14 @@ namespace GearShift
         /**********************/
         private bool isValidLocation()
         {
-            if (this.numCollisions > 0)
-            { return false; }
-            else
-            { return true; }
+            if (this.numCollisions == 0) {
+					return false; 
+					Debug.Log ("collision is false ");
+			} 
+			else{
+				return true; 
+				Debug.Log ("collision is true ");
+			}
         }
 
         /**********************/
@@ -107,6 +111,7 @@ namespace GearShift
             lastPosition = transform.position;
             Vector3 fullOffset = transform.position - InputMouse.Instance.worldPosition;
             offset = new Vector3(fullOffset.x, 0, fullOffset.z);
+
         }
 
         protected override void Awake()
@@ -136,6 +141,7 @@ namespace GearShift
             if (isValidLocation())
             {
                 // Lock Coordinates of Gear.
+
                 lastPosition = transform.position;
                 renderer.material.color = Color.green;
             }
