@@ -75,14 +75,7 @@ namespace GearShift
         /**********************/
         private bool isValidLocation()
         {
-            if (this.numCollisions == 0) {
-					return false; 
-					Debug.Log ("collision is false ");
-			} 
-			else{
-				return true; 
-				Debug.Log ("collision is true ");
-			}
+            return (numCollisions == 0);
         }
 
         /**********************/
@@ -162,7 +155,7 @@ namespace GearShift
         void OnTriggerEnter(Collider col)
         {
             numCollisions = numCollisions + 1;
-            //Debug.Log("we collided with "+col.gameObject.name);
+            //Debug.Log("we collided with "+col.gameObject.name + " num " + numCollisions);
         }
 
         // Called when two gears separate.
@@ -170,7 +163,11 @@ namespace GearShift
         void OnTriggerExit(Collider col)
         {
             numCollisions = numCollisions - 1;
-            //Debug.Log("we just left" + col.gameObject.name);
+            if(numCollisions<0)
+            {
+                numCollisions = 0;
+            }
+            //Debug.Log("we just left" + col.gameObject.name + " num " + numCollisions);
         }
     }
 }
