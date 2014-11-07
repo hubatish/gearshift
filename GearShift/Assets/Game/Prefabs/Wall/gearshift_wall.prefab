@@ -361,7 +361,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .0293800142, y: .0919289216, z: .380138546}
+  m_Size: {x: .0293800142, y: .119999997, z: .380138546}
   m_Center: {x: -.00413060933, y: 3.7252903e-09, z: 1.02252965e-17}
 --- !u!95 &9500000
 Animator:
@@ -406,6 +406,7 @@ MonoBehaviour:
   rootGear: 0
   obstacle: {fileID: 0}
   clockwise: 1
+  currentRotation: 0
   attachedGears: []
 --- !u!114 &11400004
 MonoBehaviour:

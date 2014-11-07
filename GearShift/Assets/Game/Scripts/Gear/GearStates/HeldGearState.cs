@@ -34,12 +34,13 @@ namespace GearShift
 
         public override void Release()
         {
-            GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().addGear(inPlace);
+            GearCounter gearCounter = GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>();
+            gearCounter.addGear(inPlace);
             //check for numCollisions
 			if (this.tag == "Null Gear")
 			{
 				master.ChangeState(locked);
-				GameObject.FindWithTag("GearCounter").GetComponent<GearCounter>().setLastGear(null);
+				gearCounter.setLastGear(null);
 			}
 			else
             { master.ChangeState(inPlace); }

@@ -27,12 +27,12 @@ namespace GearShift
         {
             //Collisions with this object should never actually happen but...
             rigidbody.isKinematic = true;
-            gameObject.layer = LayerMask.NameToLayer("Gearbox Gears");
+            gameObject.layer = CustomLayers.gearboxGears;//LayerMask.NameToLayer("Gearbox Gears") << 8;
         }
         public override void Deactivate()
         {
             rigidbody.isKinematic = false;
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = CustomLayers.levelGears;//LayerMask.NameToLayer("Default") << 8;
         }
     }
 }

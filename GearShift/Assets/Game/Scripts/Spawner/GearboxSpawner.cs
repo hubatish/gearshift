@@ -38,7 +38,7 @@ public class GearboxSpawner : MonoBehaviour {
 	void Update(){
 		// Check if the # of gears needed are present in the gearbox
 		for (int i = spawnpoints.Length - 1; i >= 0; i--) {
-			if(createdGears[i].layer == LayerMask.NameToLayer ("Default")){
+			if(createdGears[i].layer != CustomLayers.gearboxGears){
 				createdGears[i] = spawnGear(i);
 			}
 		}

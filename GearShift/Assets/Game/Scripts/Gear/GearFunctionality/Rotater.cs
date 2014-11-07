@@ -90,8 +90,21 @@ using GearShift;
 		/// Each Gear calls this...
 		protected void OnTriggerEnter(Collider col)
 		{
+            //Let's do a raycast to that collider and see if there are any non-gear objects in the way
+            int layerMask = LayerMask.NameToLayer("Level Gears") << 8;
+            //invert the mask to only check against other layers, not "Level Gears"
+            layerMask = ~layerMask;
+            RaycastHit hitInfo;
+            if(Physics.Linecast(transform.position, col.transform.position,out hitInfo, layerMask))
+            {
+                //there are objects in the way, stop
+                Debug.Log("oh nos objects in the way"+hitInfo.collider.gameObject.name);
+                return;
+            }
+            Debug.Log("o i made it past that triggerenter");
+
 			//Attach the next gear
-			Rotater other = col.GetComponent<Rotater>();
+            Rotater other = col.GetComponent<Rotater>();
 			if(other!=null)
 			{
 				//record that we're connected
@@ -100,7 +113,9 @@ using GearShift;
 				//has this gear been placed - don't do stuff for HeldGear
 				if(enabled && other.enabled)
 				{
-					//I'm not rotating but connected gear is
+                    //this happens when we were out of range (when placed) and then go in range from increased collider size
+
+                    /*//I'm not rotating but connected gear is
 					if(other.isRotating && !isRotating)
 					{
 						PowerOn(other);
@@ -111,15 +126,15 @@ using GearShift;
 						other.PowerOn(this);
 					}
 					//we're both rotating - this might be a fail case
-					else if(isRotating && other.isRotating)
+					if(isRotating && other.isRotating)
 					{
 						//are we rotating the same direction?
 						if(clockwise == other.clockwise)
 						{
-							//FAIL CASE!!  Probably break one of the gears
-							GameObject.Destroy(gameObject);
+							//FAIL CASE!!  Probably break a gear
+							GameObject.Destroy(other.gameObject);
 						}
-					}
+					}*/
 				}
 			}
 		}
@@ -266,6 +281,16 @@ using GearShift;
 				{
 					attached.PowerOn(this);
 				}
+                else
+                {
+					//we're both rotating - this might be a fail case
+					//are we rotating the same direction?
+					if(clockwise == attached.clockwise)
+					{
+						//FAIL CASE!!  Probably break a gear
+						GameObject.Destroy(gameObject);
+					}
+                }
 			}
 		}
 
