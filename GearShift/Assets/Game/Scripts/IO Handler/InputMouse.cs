@@ -14,7 +14,7 @@ namespace GearShift
     {
         public LayerController layers;
 
-        protected void Awake()
+        public override void Awake()
         {
             if (layers == null)
             {

@@ -105,7 +105,7 @@ namespace GearShift
         /**********************/
         /**   Initializers   **/
         /**********************/
-        protected void Start()
+        protected override void Start()
         {
             //Using this rather than Activate for clarity
             numCollisions = 0;

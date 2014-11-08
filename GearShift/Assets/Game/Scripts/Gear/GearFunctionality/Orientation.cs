@@ -5,7 +5,7 @@ namespace GearShift
 {
 	public class Orientation : MonoBehaviour
 	{
-		private float Radius = .12f;
+		//private float Radius = .12f;
 		private int TeethCount = 20;
 
 		// Use this for initialization
