@@ -12,9 +12,12 @@ public class GearboxSpawner : MonoBehaviour {
 	public Vector3[] spawnpoints = new Vector3[5]; // Location of Spawn
 	List<GameObject> probabilitySpawnList = new List<GameObject>(); // Full "pool" of gears that are chosen from
 	List<GameObject> createdGears = new List<GameObject>(); // Gears currently in gearbox
+	public int nullGearSpawnMax = 3;
+	
+	public GameObject[] baseHandList; // First hand of gears to be spawned
+	public bool useBaseHand = true; // Determine whether or not to use/load base hand
 
 	private int nullGearSpawnCount = 0;
-	public int nullGearSpawnMax = 3;
 
     protected int numGearsSpawned = 0;
 
@@ -30,7 +33,14 @@ public class GearboxSpawner : MonoBehaviour {
 		}
 
 		// Spawn the initial number of gears
-		for (int i = 0; i < spawnpoints.Length; i++) {
+		// First from default hand
+		if (useBaseHand) {
+			for(int i = 0; i < spawnpoints.Length; i++){
+				createdGears.Add(spawnSpecificGear(i, baseHandList[i]));
+			}
+		}
+		// Then fill in the rest
+		for (int i = createdGears.Count; i < spawnpoints.Length; i++) {
 			createdGears.Add(spawnGear(i));
 		}
 	}
@@ -65,6 +75,21 @@ public class GearboxSpawner : MonoBehaviour {
         //temporarily put gears under myself
         newGear.transform.parent = transform;
 
+		return newGear;
+	}
+
+	GameObject spawnSpecificGear(int i, GameObject gear){
+		//spawn the gear at the correct spawn point
+		Vector3 adjustedSpawnPoint = new Vector3(spawnpoints[i].x, layers.getCurrentY(), spawnpoints[i].z);
+		GameObject newGear = Instantiate (gear, adjustedSpawnPoint, Quaternion.identity) as GameObject;
+
+		//name and organize the gears for debugging and layers
+		numGearsSpawned += 1;
+		newGear.name += numGearsSpawned.ToString();
+		
+		//temporarily put gears under myself
+		newGear.transform.parent = transform;
+		
 		return newGear;
 	}
 	
