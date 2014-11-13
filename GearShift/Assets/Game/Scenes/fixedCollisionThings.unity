@@ -358,7 +358,7 @@ AudioSource:
   m_GameObject: {fileID: 61451315}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 3916bbc13ab9c1e4fbb7aad8ea0c4257, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1dbc301197f67544b94106e8aa929d88, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -697,7 +697,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 617257233}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!1001 &153294745
 Prefab:
   m_ObjectHideFlags: 0
@@ -2189,9 +2189,9 @@ Transform:
   m_LocalPosition: {x: .899967194, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 121075376}
   - {fileID: 1793325326}
   - {fileID: 1914097008}
-  - {fileID: 121075376}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1001 &628936807
@@ -4146,7 +4146,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!23 &1221285828
 Renderer:
   m_ObjectHideFlags: 0
@@ -4541,6 +4540,10 @@ Prefab:
       propertyPath: layerPositions.Array.data[0]
       value: 
       objectReference: {fileID: 617257233}
+    - target: {fileID: 8200000, guid: 2519d405f16dd724fbcded75c2f51691, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1dbc301197f67544b94106e8aa929d88, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2519d405f16dd724fbcded75c2f51691, type: 2}
   m_RootGameObject: {fileID: 1706981404}
@@ -4639,7 +4642,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!23 &1361828163
 Renderer:
   m_ObjectHideFlags: 0
@@ -6414,7 +6416,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!23 &1793325324
 Renderer:
   m_ObjectHideFlags: 0
@@ -6456,7 +6457,7 @@ Transform:
   m_Children:
   - {fileID: 1361828161}
   m_Father: {fileID: 617257233}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &1793325327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6469,6 +6470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb70fc82a11c2b419ee25121e63f18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeethCount: 20
 --- !u!1001 &1819000480
 Prefab:
   m_ObjectHideFlags: 0
@@ -6733,7 +6735,6 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!23 &1914097006
 Renderer:
   m_ObjectHideFlags: 0
@@ -6776,7 +6777,7 @@ Transform:
   - {fileID: 1221285826}
   - {fileID: 1175972525}
   m_Father: {fileID: 617257233}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &1914097009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6789,6 +6790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb70fc82a11c2b419ee25121e63f18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeethCount: 20
 --- !u!1001 &1942700482
 Prefab:
   m_ObjectHideFlags: 0
@@ -7076,6 +7078,8 @@ MonoBehaviour:
   - {x: -7.5, y: 0, z: 2.5}
   - {x: -7.5, y: 0, z: 4}
   nullGearSpawnMax: 3
+  baseHandList: []
+  useBaseHand: 1
   layers: {fileID: 1250125475}
 --- !u!1 &2069458748
 GameObject:
