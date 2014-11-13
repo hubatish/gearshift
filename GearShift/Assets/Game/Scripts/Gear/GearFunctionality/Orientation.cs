@@ -6,7 +6,7 @@ namespace GearShift
 	public class Orientation : MonoBehaviour
 	{
 		//private float Radius = .12f;
-		public int TeethCount = 20;
+		private int TeethCount = 20;
 
 		// Use this for initialization
 		void Start()
@@ -33,7 +33,7 @@ namespace GearShift
 			}*/
 
 			float TeethAngle = 360f / (TeethCount * 2);
-			float OtherAngle = otherGear.GetComponent<Rotater>().currentRotation;
+			float OtherAngle = otherGear.transform.rotation.y;
 			float Remainder = OtherAngle % TeethAngle;
 
 			return (Remainder + TeethAngle);

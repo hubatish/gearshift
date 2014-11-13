@@ -3,10 +3,10 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - Placed Gear
   - GearCounter
-  - Null Gear
-  - 
+  - GearSpawner
+  - LayerController
+  - ToolbarGearContainer
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

@@ -1,35 +1,52 @@
-﻿using UnityEngine;
+﻿//
+// Copyright © 2014 GearShift Studios, All Rights Reserved
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHORS "AS IS" AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+// OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+// IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+// THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+
+using UnityEngine;
 using System.Collections;
 using GearShift;
 
-/// <summary>
-/// The EndGear is always auto placed on the board; it never moves or changes states
-/// So it's really more like an obstacle than a gear
-///     This lets us detect when it starts rotating
-///     
-/// Obviously handles winning the game when it's powered on, though the specifics may go elsewhere later
-/// </summary>
-public class EndGearScript : Obstacle {
+namespace GearShift
+{
+	/// <summary>
+	/// 
+	/// </summary>
+	public class EndGearScript : MonoBehaviour
+	{
+		/**********************/
+		/**  Externals Data  **/
+		/**********************/
+		// Rotation Controller From the Gear linked to this obstacle
+		public Rotation rotationController;
+		
+		// Splash Image to be displayed when victory is achieved
+		public GameObject victorySplash;
 
-    public override void PowerOn()
-    {
-        Win();
-        base.PowerOn();
-    }
+		/**********************/
+		/**   Initializers   **/
+		/**********************/
+		protected void Start() {}
 
-    public GameObject winObject;
-    
-    public void Win()
-    {
-        winObject.SetActive(true);
-    }
-
-    //temp code to try to restart the game
-    public void Update()
-    {
-        if(Input.GetKey(KeyCode.R))
+		/**********************/
+		/**     Updating     **/
+		/**********************/
+        protected void Update()
         {
-            Application.LoadLevel(Application.loadedLevel);
+			if (rotationController.getRotationStatus() != Rotation.GearRotation.NoRotation)
+			{
+				victorySplash.SetActive(true);
+			}
         }
-    }
+	}
 }

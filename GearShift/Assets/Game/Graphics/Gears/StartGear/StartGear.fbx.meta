@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 268cc6482f53a3e41ac061fb707006ee
+guid: a93cb26019237cd4487e0229c0ffd89a
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: gear_01_pPipe1
+    4300000: pPipe1
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -17,6 +17,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -60,4 +61,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  additionalBone: 0
   userData: 
